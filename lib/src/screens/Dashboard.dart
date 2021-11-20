@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
@@ -16,16 +18,14 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
 
   @override
   Widget build(BuildContext context) {
     final _tabs = [
+      Text('Search Feature Currently Unavailable'),
       storeTab(context),
-      Text('Tab2'),
-      Text('Tab3'),
-      Text('Tab4'),
-      Text('Tab5'),
+      Text('Resources Feature Currently Unavailable'),
     ];
 
     return Scaffold(
@@ -33,62 +33,31 @@ class _DashboardState extends State<Dashboard> {
         appBar: AppBar(
           centerTitle: true,
           elevation: 0,
-          leading: IconButton(
-            onPressed: () {},
-            iconSize: 21,
-            icon: Icon(Fryo.funnel),
-          ),
           backgroundColor: primaryColor,
           title:
-              Text('Fryo', style: logoWhiteStyle, textAlign: TextAlign.center),
-          actions: <Widget>[
-            IconButton(
-              padding: EdgeInsets.all(0),
-              onPressed: () {},
-              iconSize: 21,
-              icon: Icon(Fryo.magnifier),
-            ),
-            IconButton(
-              padding: EdgeInsets.all(0),
-              onPressed: () {},
-              iconSize: 21,
-              icon: Icon(Fryo.alarm),
-            )
-          ],
+              Text('DialysisNow', textAlign: TextAlign.center),
         ),
         body: _tabs[_selectedIndex],
         bottomNavigationBar: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(Fryo.shop),
+                icon: Icon(Fryo.search),
                 title: Text(
-                  'Store',
+                  'Search',
                   style: tabLinkStyle,
                 )),
             BottomNavigationBarItem(
-                icon: Icon(Fryo.cart),
+                icon: Icon(Fryo.star),
                 title: Text(
-                  'My Cart',
+                  'Main Center',
                   style: tabLinkStyle,
                 )),
             BottomNavigationBarItem(
-                icon: Icon(Fryo.heart_1),
+                icon: Icon(Fryo.alarm),
                 title: Text(
-                  'Favourites',
+                  'Resources',
                   style: tabLinkStyle,
                 )),
-            BottomNavigationBarItem(
-                icon: Icon(Fryo.user_1),
-                title: Text(
-                  'Profile',
-                  style: tabLinkStyle,
-                )),
-            BottomNavigationBarItem(
-                icon: Icon(Fryo.cog_1),
-                title: Text(
-                  'Settings',
-                  style: tabLinkStyle,
-                ))
           ],
           currentIndex: _selectedIndex,
           type: BottomNavigationBarType.fixed,
