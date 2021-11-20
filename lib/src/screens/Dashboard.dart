@@ -274,11 +274,9 @@ Widget headerTopCategories() {
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
           children: <Widget>[
-            headerCategoryItem('Frieds', Fryo.dinner, onPressed: () {}),
-            headerCategoryItem('Fast Food', Fryo.food, onPressed: () {}),
-            headerCategoryItem('Creamery', Fryo.poop, onPressed: () {}),
-            headerCategoryItem('Hot Drinks', Fryo.coffee_cup, onPressed: () {}),
-            headerCategoryItem('Vegetables', Fryo.leaf, onPressed: () {}),
+            headerCategoryItem('Report', Fryo.pencil, onPressed: () {}),
+            headerCategoryItem('Call', Fryo.phone, onPressed: () {}),
+            headerCategoryItem('Navigate', Fryo.map, onPressed: () {}),
           ],
         ),
       )
