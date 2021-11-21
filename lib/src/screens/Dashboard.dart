@@ -5,6 +5,7 @@ import '../shared/fryo_icons.dart';
 import './ProductPage.dart';
 import '../shared/Product.dart';
 import '../shared/partials.dart';
+import './ReportScreen.dart';
 
 class Dashboard extends StatefulWidget {
   final String pageTitle;
@@ -162,7 +163,7 @@ Widget storeTab(BuildContext context) {
   ];
 
   return ListView(children: <Widget>[
-    headerTopCategories(),
+    headerTopCategories(context),
     deals('Hot Deals', onViewMore: () {}, items: <Widget>[
       foodItem(foods[0], onTapped: () {
         Navigator.push(
@@ -293,7 +294,7 @@ Widget sectionHeader(String headerTitle, {onViewMore}) {
 }
 
 // wrap the horizontal listview inside a sizedBox..
-Widget headerTopCategories() {
+Widget headerTopCategories(BuildContext context) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     crossAxisAlignment: CrossAxisAlignment.center,
@@ -306,7 +307,9 @@ Widget headerTopCategories() {
           shrinkWrap: true,
           children: <Widget>[
             headerCategoryItem('Frieds', Fryo.dinner, onPressed: () {}),
-            headerCategoryItem('Fast Food', Fryo.food, onPressed: () {}),
+            headerCategoryItem('Fast Food', Fryo.food, onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ReportScreen()));
+            }),
             headerCategoryItem('Creamery', Fryo.poop, onPressed: () {}),
             headerCategoryItem('Hot Drinks', Fryo.coffee_cup, onPressed: () {}),
             headerCategoryItem('Vegetables', Fryo.leaf, onPressed: () {}),
