@@ -7,6 +7,7 @@ import '../shared/fryo_icons.dart';
 import './ProductPage.dart';
 import '../shared/Product.dart';
 import '../shared/partials.dart';
+import './ReportScreen.dart';
 
 class Dashboard extends StatefulWidget {
   final String pageTitle;
@@ -73,62 +74,6 @@ class _DashboardState extends State<Dashboard> {
   }
 }
 
-Widget storeTab(BuildContext context) {
-
-  // will pick it up from here
-  // am to start another template
-  List<Product> foods = [
-    Product(
-        name: "Hamburger",
-        image: "images/3.png",
-        price: "\$25.00",
-        userLiked: true,
-        discount: 10),
-    Product(
-        name: "Pasta",
-        image: "images/5.png",
-        price: "\$150.00",
-        userLiked: false,
-        discount: 7.8),
-    Product(
-      name: "Akara",
-      image: 'images/2.png',
-      price: '\$10.99',
-      userLiked: false,
-    ),
-    Product(
-        name: "Strawberry",
-        image: "images/1.png",
-        price: '\$50.00',
-        userLiked: true,
-        discount: 14)
-  ];
-
-  List<Product> drinks = [
-    Product(
-        name: "Coca-Cola",
-        image: "images/6.png",
-        price: "\$45.12",
-        userLiked: true,
-        discount: 2),
-    Product(
-        name: "Lemonade",
-        image: "images/7.png",
-        price: "\$28.00",
-        userLiked: false,
-        discount: 5.2),
-    Product(
-        name: "Vodka",
-        image: "images/8.png",
-        price: "\$78.99",
-        userLiked: false),
-    Product(
-        name: "Tequila",
-        image: "images/9.png",
-        price: "\$168.99",
-        userLiked: true,
-        discount: 3.4)
-  ];
 
   return ListView(children: <Widget>[
     Image.asset("images/CenterBuilding.jpeg", height: 150, fit: BoxFit.fitWidth,),
@@ -160,7 +105,7 @@ Widget sectionHeader(String headerTitle, {onViewMore}) {
 }
 
 // wrap the horizontal listview inside a sizedBox..
-Widget headerTopCategories() {
+Widget headerTopCategories(BuildContext context) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     crossAxisAlignment: CrossAxisAlignment.center,
