@@ -134,6 +134,7 @@ Widget storeTab(BuildContext context) {
     Image.asset("images/CenterBuilding.jpeg", height: 150, fit: BoxFit.fitWidth,),
     mainInfo(),
     headerTopCategories(),
+    report(),
     medicalInfo(),
   ]);
 }
@@ -386,5 +387,26 @@ Widget medicalInfo() {
 
         ]
       )
+  );
+}
+
+Widget report() {
+  return Container(
+      padding: new EdgeInsets.all(20.0),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+        child: Column(
+          children: <Widget>[new Text("WARNING:",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+            textAlign: TextAlign.center,),
+            new Text("CENTER MAY BE CLOSED",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+              textAlign: TextAlign.center,),
+            new Text("DUE TO INTERNAL REASONS",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+              textAlign: TextAlign.center,)
+        ])),
   );
 }
