@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import '../shared/styles.dart';
+//import '../shared/styles.dart';
 import '../shared/colors.dart';
 import '../shared/fryo_icons.dart';
-import './ProductPage.dart';
-import '../shared/Product.dart';
-import '../shared/partials.dart';
+//import './ProductPage.dart';
+//import '../shared/Product.dart';
+//import '../shared/partials.dart';
 
-class Dashboard extends StatefulWidget {
+class ReportScreen extends StatefulWidget {
   final String pageTitle;
 
-  Dashboard({Key key, this.pageTitle}) : super(key: key);
+  ReportScreen({Key key, this.pageTitle}) : super(key: key);
 
   @override
-  _DashboardState createState() => _DashboardState();
+  _ReportScreenState createState() => _ReportScreenState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _ReportScreenState extends State<ReportScreen> {
   int _selectedIndex = 0;
 
   @override
@@ -43,7 +43,7 @@ class _DashboardState extends State<Dashboard> {
       ),
       backgroundColor: primaryColor,
       title: Text('DialysisNow',
-          style: logoWhiteStyle, textAlign: TextAlign.center),
+          textAlign: TextAlign.center),
     );
   }
 
@@ -63,13 +63,155 @@ class _DashboardState extends State<Dashboard> {
               ),
               //textAlign: TextAlign.center,
             ),
-            _icons('Power Outage', Icons.power_off),
-            _icons('Hurricane', Icons.storm),
-            _icons('Water Contamination', Icons.water_damage),
-            _icons('Internal', Icons.warning_amber),
-            _icons('Otherss', Icons.construction),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget> [
+                Container(
+                  width: 80,
+                  height: 80,
+                  child: FittedBox(
+                    child: FloatingActionButton(
+                      shape: CircleBorder(),
+                      child: Icon(Icons.power_off),
+                      onPressed: (){},
+                    ),
+                  )
+                ),
+                Container(
+                    width: 80,
+                    height: 80,
+                    child: FittedBox(
+                      child: FloatingActionButton(
+                        shape: CircleBorder(),
+                        child: Icon(Icons.storm),
+                        onPressed: (){},
+                      ),
+                    )
+                ),
+                Container(
+                    width: 80,
+                    height: 80,
+                    child: FittedBox(
+                      child: FloatingActionButton(
+                        shape: CircleBorder(),
+                        child: Icon(Icons.water_damage),
+                        onPressed: (){},
+                      ),
+                    )
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Center(
+                  child: Text(
+                    "Power Outage",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
+                  )
+                ),
+                Center(
+                    child: Text(
+                      "Hurricane",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
+                    )
+                ),
+                Center(
+                    child: Column(
+                      children: <Widget> [
+                        Text(
+                          "Water",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green,
+                          ),
+                        ),
+                        Text(
+                          "Contamination",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green,
+                          ),
+                        )
+                      ],
+                    ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Container(
+                    width: 80,
+                    height: 80,
+                    child: FittedBox(
+                      child: FloatingActionButton(
+                        shape: CircleBorder(),
+                        child: Icon(Icons.warning_amber),
+                        onPressed: (){},
+                      ),
+                    )
+                ),
+                Container(
+                    width: 80,
+                    height: 80,
+                    child: FittedBox(
+                      child: FloatingActionButton(
+                        shape: CircleBorder(),
+                        child: Icon(Icons.note),
+                        onPressed: (){},
+                      ),
+                    )
+                ),
+              ]
+            ),
+            SizedBox(height:10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Center(
+                    child: Text(
+                      "Internal",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
+                    )
+                ),
+                Center(
+                    child: Text(
+                      "Others",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
+                    )
+                ),
+              ],
+            ),
             //Spacer(flex: 2),
-            SizedBox(height: 50),
+            SizedBox(height: 20),
             Text(
               "Additional Information",
               style: TextStyle(
@@ -86,10 +228,37 @@ class _DashboardState extends State<Dashboard> {
                 hintText: 'Enter additional information',
               ),
             ),
-            TextButton(
-                onPressed: null,
-                child: const Text('REPORT'),
-                style: TextButton.styleFrom(backgroundColor: Colors.green))
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                TextButton(
+                  onPressed: (){},
+                  child:
+                  const Text(
+                    'CANCEL',
+                    style: TextStyle(
+                        backgroundColor: Colors.red,
+                        color: Colors.white
+                    ) ,
+                  ),
+                  style: TextButton.styleFrom(backgroundColor: Colors.red),
+                ),
+                TextButton(
+                  onPressed: (){},
+                  child:
+                  const Text(
+                    'REPORT',
+                    style: TextStyle(
+                        backgroundColor: Colors.green,
+                        color: Colors.white
+                    ) ,
+                  ),
+                  style: TextButton.styleFrom(backgroundColor: Colors.green),
+                )
+              ],
+            )
+
           ],
         ));
   }
