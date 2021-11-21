@@ -25,7 +25,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     final _tabs = [
       Text('Search Feature Currently Unavailable'),
-      storeTab(context),
+      infoTab(context),
       Text('Resources Feature Currently Unavailable'),
     ];
 
@@ -36,7 +36,7 @@ class _DashboardState extends State<Dashboard> {
           elevation: 0,
           backgroundColor: primaryColor,
           title:
-              Text('DialysisNow', textAlign: TextAlign.center),
+          Text('DialysisNow', textAlign: TextAlign.center),
         ),
         body: _tabs[_selectedIndex],
         bottomNavigationBar: BottomNavigationBar(
@@ -74,11 +74,11 @@ class _DashboardState extends State<Dashboard> {
   }
 }
 
-
+Widget infoTab(BuildContext context) {
   return ListView(children: <Widget>[
     Image.asset("images/CenterBuilding.jpeg", height: 150, fit: BoxFit.fitWidth,),
     mainInfo(),
-    headerTopCategories(),
+    headerTopCategories(context),
     report(),
     medicalInfo(),
   ]);
@@ -117,7 +117,9 @@ Widget headerTopCategories(BuildContext context) {
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,
           children: <Widget>[
-            headerCategoryItem('Report', Fryo.pencil, onPressed: () {}),
+            headerCategoryItem('Report', Fryo.pencil, onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ReportScreen()));
+            }),
             headerCategoryItem('Call', Fryo.phone, onPressed: () {}),
             headerCategoryItem('Navigate', Fryo.map, onPressed: () {}),
           ],
@@ -166,12 +168,12 @@ Widget deals(String dealTitle, {onViewMore, List<Widget> items}) {
             children: (items != null)
                 ? items
                 : <Widget>[
-                    Container(
-                      margin: EdgeInsets.only(left: 15),
-                      child: Text('No items available at this moment.',
-                          style: taglineText),
-                    )
-                  ],
+              Container(
+                margin: EdgeInsets.only(left: 15),
+                child: Text('No items available at this moment.',
+                    style: taglineText),
+              )
+            ],
           ),
         )
       ],
@@ -182,49 +184,49 @@ Widget deals(String dealTitle, {onViewMore, List<Widget> items}) {
 Widget mainInfo() {
   return Flexible(child:
   Container(
-    color: primaryColor,
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        SizedBox(
-            height: 10
-        ),
-        Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        SizedBox(
-            width: 10
-        ),
-        Container(
-            width: 100.0,
-            height: 100.0,
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: new NetworkImage(
-                        "https://www.smileamilepainting.com/wp-content/uploads/2018/12/Davita-Care-Clinic-1024x614.jpg")
+      color: primaryColor,
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(
+                height: 10
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                    width: 10
+                ),
+                Container(
+                    width: 100.0,
+                    height: 100.0,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: new NetworkImage(
+                                "https://www.smileamilepainting.com/wp-content/uploads/2018/12/Davita-Care-Clinic-1024x614.jpg")
+                        )
+                    )
+                ),
+                SizedBox(
+                    width: 10
+                ),
+                Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Davita Southwest Atlanta", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                      Text("Dialysis Center", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+                    ]
                 )
-            )
-        ),
-        SizedBox(
-          width: 10
-        ),
-        Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text("Davita Southwest Atlanta", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-              Text("Dialysis Center", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
-            ]
-        )
-      ],
-    ),
-        SizedBox(
-            height: 10
-        ),])
+              ],
+            ),
+            SizedBox(
+                height: 10
+            ),])
   ));
 }
 
@@ -233,26 +235,26 @@ Widget medicalInfo() {
       padding: new EdgeInsets.all(20.0),
       color: bgColor,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text("Location:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-          Text("3620 M.L.K. Jr Dr SW, Atlanta, GA 30331", style: TextStyle(fontSize: 15)),
-          SizedBox(
-              height: 15
-          ),
-          Text("Phone:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-          Text("(866) 544-6741", style: TextStyle(fontSize: 15)),
-          SizedBox(
-              height: 15
-          ),
-          Text("Center Status:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-          Text("OPEN", style: TextStyle(fontSize: 15)),
-          SizedBox(
-              height: 15
-          ),
-          Text("Hours:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-          Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text("Location:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+            Text("3620 M.L.K. Jr Dr SW, Atlanta, GA 30331", style: TextStyle(fontSize: 15)),
+            SizedBox(
+                height: 15
+            ),
+            Text("Phone:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+            Text("(866) 544-6741", style: TextStyle(fontSize: 15)),
+            SizedBox(
+                height: 15
+            ),
+            Text("Center Status:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+            Text("OPEN", style: TextStyle(fontSize: 15)),
+            SizedBox(
+                height: 15
+            ),
+            Text("Hours:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+            Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -262,96 +264,96 @@ Widget medicalInfo() {
                 ),
                 Text("5AM - 10PM", style: TextStyle(fontSize: 15))
               ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text("Tuesday:", style: TextStyle(fontSize: 15)),
-              SizedBox(
-                  width: 38
-              ),
-              Text("5AM - 4PM", style: TextStyle(fontSize: 15))
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text("Wednesday:", style: TextStyle(fontSize: 15)),
-              SizedBox(
-                  width: 15
-              ),
-              Text("5AM - 10PM", style: TextStyle(fontSize: 15))
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text("Thursday:", style: TextStyle(fontSize: 15)),
-              SizedBox(
-                  width: 31
-              ),
-              Text("5AM - 4PM", style: TextStyle(fontSize: 15))
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text("Friday:", style: TextStyle(fontSize: 15)),
-              SizedBox(
-                  width: 53
-              ),
-              Text("5AM - 10PM", style: TextStyle(fontSize: 15))
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text("Saturday:", style: TextStyle(fontSize: 15)),
-              SizedBox(
-                  width: 33
-              ),
-              Text("5AM - 4PM", style: TextStyle(fontSize: 15))
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text("Sunday:", style: TextStyle(fontSize: 15)),
-              SizedBox(
-                  width: 43
-              ),
-              Text("CLOSED", style: TextStyle(fontSize: 15))
-            ],
-          )
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text("Tuesday:", style: TextStyle(fontSize: 15)),
+                SizedBox(
+                    width: 38
+                ),
+                Text("5AM - 4PM", style: TextStyle(fontSize: 15))
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text("Wednesday:", style: TextStyle(fontSize: 15)),
+                SizedBox(
+                    width: 15
+                ),
+                Text("5AM - 10PM", style: TextStyle(fontSize: 15))
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text("Thursday:", style: TextStyle(fontSize: 15)),
+                SizedBox(
+                    width: 31
+                ),
+                Text("5AM - 4PM", style: TextStyle(fontSize: 15))
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text("Friday:", style: TextStyle(fontSize: 15)),
+                SizedBox(
+                    width: 53
+                ),
+                Text("5AM - 10PM", style: TextStyle(fontSize: 15))
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text("Saturday:", style: TextStyle(fontSize: 15)),
+                SizedBox(
+                    width: 33
+                ),
+                Text("5AM - 4PM", style: TextStyle(fontSize: 15))
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text("Sunday:", style: TextStyle(fontSize: 15)),
+                SizedBox(
+                    width: 43
+                ),
+                Text("CLOSED", style: TextStyle(fontSize: 15))
+              ],
+            )
 
-        ]
+          ]
       )
   );
 }
 
 Widget report() {
   return Container(
-      padding: new EdgeInsets.all(20.0),
-      child: Container(
+    padding: new EdgeInsets.all(20.0),
+    child: Container(
         decoration: BoxDecoration(
             color: Colors.red,
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
         child: Column(
-          children: <Widget>[new Text("WARNING:",
-            style: TextStyle(color: Colors.white, fontSize: 20),
-            textAlign: TextAlign.center,),
-            new Text("CENTER MAY BE CLOSED",
+            children: <Widget>[new Text("WARNING:",
               style: TextStyle(color: Colors.white, fontSize: 20),
               textAlign: TextAlign.center,),
-            new Text("DUE TO INTERNAL REASONS",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-              textAlign: TextAlign.center,)
-        ])),
+              new Text("CENTER MAY BE CLOSED",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+                textAlign: TextAlign.center,),
+              new Text("DUE TO INTERNAL REASONS",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+                textAlign: TextAlign.center,)
+            ])),
   );
 }
