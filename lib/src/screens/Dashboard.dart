@@ -131,113 +131,10 @@ Widget storeTab(BuildContext context) {
   ];
 
   return ListView(children: <Widget>[
+    Image.asset("images/CenterBuilding.jpeg", height: 150, fit: BoxFit.fitWidth,),
+    mainInfo(),
     headerTopCategories(),
-    deals('Hot Deals', onViewMore: () {}, items: <Widget>[
-      foodItem(foods[0], onTapped: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return new ProductPage(
-                productData: foods[0],
-              );
-            },
-          ),
-        );
-      }, onLike: () {}),
-      foodItem(foods[1], onTapped: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return new ProductPage(
-                productData: foods[1],
-              );
-            },
-          ),
-        );
-      }, imgWidth: 250, onLike: () {
-        
-      }),
-      foodItem(foods[2], onTapped: () {
-         Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return new ProductPage(
-                productData: foods[2],
-              );
-            },
-          ),
-        );
-      }, imgWidth: 200, onLike: () {
-       
-      }),
-      foodItem(foods[3], onTapped: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return new ProductPage(
-                productData: foods[3],
-              );
-            },
-          ),
-        );
-      }, onLike: () {
-        
-      }),
-    ]),
-    deals('Drinks Parol', onViewMore: () {}, items: <Widget>[
-      foodItem(drinks[0], onTapped: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return new ProductPage(
-                productData: drinks[0],
-              );
-            },
-          ),
-        );
-      }, onLike: () {}, imgWidth: 60),
-      foodItem(drinks[1], onTapped: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return new ProductPage(
-                productData: drinks[1],
-              );
-            },
-          ),
-        );
-      }, onLike: () {}, imgWidth: 75),
-      foodItem(drinks[2], onTapped: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return new ProductPage(
-                productData: drinks[2],
-              );
-            },
-          ),
-        );
-      }, imgWidth: 110, onLike: () {}),
-      foodItem(drinks[3], onTapped: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return new ProductPage(
-                productData: drinks[3],
-              );
-            },
-          ),
-        );
-      }, onLike: () {}),
-    ])
+    medicalInfo(),
   ]);
 }
 
@@ -267,7 +164,7 @@ Widget headerTopCategories() {
     mainAxisAlignment: MainAxisAlignment.center,
     crossAxisAlignment: CrossAxisAlignment.center,
     children: <Widget>[
-      sectionHeader('All Categories', onViewMore: () {}),
+      SizedBox(height: 10),
       SizedBox(
         height: 130,
         child: ListView(
@@ -333,5 +230,161 @@ Widget deals(String dealTitle, {onViewMore, List<Widget> items}) {
         )
       ],
     ),
+  );
+}
+
+Widget mainInfo() {
+  return Flexible(child:
+  Container(
+    color: primaryColor,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        SizedBox(
+            height: 10
+        ),
+        Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        SizedBox(
+            width: 10
+        ),
+        Container(
+            width: 100.0,
+            height: 100.0,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: new NetworkImage(
+                        "https://www.smileamilepainting.com/wp-content/uploads/2018/12/Davita-Care-Clinic-1024x614.jpg")
+                )
+            )
+        ),
+        SizedBox(
+          width: 10
+        ),
+        Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text("Davita Southwest Atlanta", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+              Text("Dialysis Center", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+            ]
+        )
+      ],
+    ),
+        SizedBox(
+            height: 10
+        ),])
+  ));
+}
+
+Widget medicalInfo() {
+  return Container(
+      padding: new EdgeInsets.all(20.0),
+      color: bgColor,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text("Location:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+          Text("3620 M.L.K. Jr Dr SW, Atlanta, GA 30331", style: TextStyle(fontSize: 15)),
+          SizedBox(
+              height: 15
+          ),
+          Text("Phone:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+          Text("(866) 544-6741", style: TextStyle(fontSize: 15)),
+          SizedBox(
+              height: 15
+          ),
+          Text("Center Status:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+          Text("OPEN", style: TextStyle(fontSize: 15)),
+          SizedBox(
+              height: 15
+          ),
+          Text("Hours:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text("Monday:", style: TextStyle(fontSize: 15)),
+                SizedBox(
+                    width: 41
+                ),
+                Text("5AM - 10PM", style: TextStyle(fontSize: 15))
+              ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text("Tuesday:", style: TextStyle(fontSize: 15)),
+              SizedBox(
+                  width: 38
+              ),
+              Text("5AM - 4PM", style: TextStyle(fontSize: 15))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text("Wednesday:", style: TextStyle(fontSize: 15)),
+              SizedBox(
+                  width: 15
+              ),
+              Text("5AM - 10PM", style: TextStyle(fontSize: 15))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text("Thursday:", style: TextStyle(fontSize: 15)),
+              SizedBox(
+                  width: 31
+              ),
+              Text("5AM - 4PM", style: TextStyle(fontSize: 15))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text("Friday:", style: TextStyle(fontSize: 15)),
+              SizedBox(
+                  width: 53
+              ),
+              Text("5AM - 10PM", style: TextStyle(fontSize: 15))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text("Saturday:", style: TextStyle(fontSize: 15)),
+              SizedBox(
+                  width: 33
+              ),
+              Text("5AM - 4PM", style: TextStyle(fontSize: 15))
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text("Sunday:", style: TextStyle(fontSize: 15)),
+              SizedBox(
+                  width: 43
+              ),
+              Text("CLOSED", style: TextStyle(fontSize: 15))
+            ],
+          )
+
+        ]
+      )
   );
 }
