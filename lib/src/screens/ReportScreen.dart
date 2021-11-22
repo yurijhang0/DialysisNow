@@ -6,6 +6,7 @@ import '../shared/fryo_icons.dart';
 //import './ProductPage.dart';
 //import '../shared/Product.dart';
 //import '../shared/partials.dart';
+import './UpdatedScreen.dart';
 
 class ReportScreen extends StatefulWidget {
   final String pageTitle;
@@ -37,11 +38,6 @@ class _ReportScreenState extends State<ReportScreen> {
     return AppBar(
       centerTitle: true,
       elevation: 0,
-      leading: IconButton(
-        onPressed: () {},
-        iconSize: 21,
-        icon: Icon(Fryo.funnel),
-      ),
       backgroundColor: primaryColor,
       title: Text('DialysisNow',
           textAlign: TextAlign.center),
@@ -75,7 +71,8 @@ class _ReportScreenState extends State<ReportScreen> {
                     child: FloatingActionButton(
                       shape: CircleBorder(),
                       child: Icon(Icons.power_off),
-                      onPressed: (){},
+                      onPressed: (){
+                      },
                     ),
                   )
                 ),
@@ -248,7 +245,9 @@ class _ReportScreenState extends State<ReportScreen> {
                   style: TextButton.styleFrom(backgroundColor: Colors.red),
                 ),
                 TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => UpdatedScreen()));
+                  },
                   child:
                   const Text(
                     'REPORT',

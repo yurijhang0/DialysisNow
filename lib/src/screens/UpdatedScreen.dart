@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
 import '../shared/fryo_icons.dart';
@@ -10,16 +9,16 @@ import '../shared/Product.dart';
 import '../shared/partials.dart';
 import './ReportScreen.dart';
 
-class Dashboard extends StatefulWidget {
+class UpdatedScreen extends StatefulWidget {
   final String pageTitle;
 
-  Dashboard({Key key, this.pageTitle}) : super(key: key);
+  UpdatedScreen({Key key, this.pageTitle}) : super(key: key);
 
   @override
-  _DashboardState createState() => _DashboardState();
+  _UpdatedScreenState createState() => _UpdatedScreenState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _UpdatedScreenState extends State<UpdatedScreen> {
   int _selectedIndex = 1;
 
   @override
@@ -80,6 +79,7 @@ Widget infoTab(BuildContext context) {
     Image.asset("images/CenterBuilding.jpeg", height: 150, fit: BoxFit.fitWidth,),
     mainInfo(),
     headerTopCategories(context),
+    report(),
     medicalInfo(),
   ]);
 }
@@ -120,10 +120,8 @@ Widget headerTopCategories(BuildContext context) {
             headerCategoryItem('Report', Fryo.pencil, onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => ReportScreen()));
             }),
-            headerCategoryItem('Call', Fryo.phone, onPressed: () =>
-              launch("tel://8665446741")
-            ),
-            headerCategoryItem('Navigate', Fryo.map, onPressed: () => launch("http://flutter.dev")),
+            headerCategoryItem('Call', Fryo.phone, onPressed: () {}),
+            headerCategoryItem('Navigate', Fryo.map, onPressed: () {}),
           ],
         ),
       )
