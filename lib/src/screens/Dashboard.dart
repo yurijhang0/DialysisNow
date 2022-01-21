@@ -1,13 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
 import '../shared/fryo_icons.dart';
-import './ProductPage.dart';
-import '../shared/Product.dart';
-import '../shared/partials.dart';
 import './ReportScreen.dart';
 
 class Dashboard extends StatefulWidget {
