@@ -6,6 +6,7 @@ import '../shared/colors.dart';
 import '../shared/fryo_icons.dart';
 import './ReportScreen.dart';
 import 'package:fryo/src/services/DialysisInfo.dart';
+import 'dart:developer';
 
 
 class Dashboard extends StatefulWidget {
@@ -31,7 +32,10 @@ class _DashboardState extends State<Dashboard> {
   @override
   void initState() {
     super.initState();
-    print('Hello');
+  }
+
+  @override
+  Widget build(BuildContext context) {
     dialysisInfoService = new DialysisInfoService();
     futureDialysisInfo = dialysisInfoService.getDialysisCenterInfo(searchId);
     futureDialysisInfo.then((value) {
@@ -42,11 +46,8 @@ class _DashboardState extends State<Dashboard> {
     }, onError: (e) {
       print(e);
     });
-    print(name);
-  }
-
-  @override
-  Widget build(BuildContext context) {
+    log(name);
+    log(address);
     final _tabs = [
       Text('Search Feature Currently Unavailable'),
       infoTab(context),
@@ -99,6 +100,7 @@ class _DashboardState extends State<Dashboard> {
 }
 
 Widget infoTab(BuildContext context) {
+  log("hello");
   return ListView(children: <Widget>[
     Image.asset("images/CenterBuilding.jpeg", height: 150, fit: BoxFit.fitWidth,),
     mainInfo(),
