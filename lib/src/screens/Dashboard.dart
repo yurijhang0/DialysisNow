@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:fryo/src/services/DialysisInfoService.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
 import '../shared/fryo_icons.dart';
 import './ReportScreen.dart';
+import 'package:fryo/src/services/DialysisInfo.dart';
+
 
 class Dashboard extends StatefulWidget {
   final String pageTitle;
+  final id = 'ChIJuc46ohEE9YgRyY2WKddJ4OY'; // test dialysis center id
 
   Dashboard({Key key, this.pageTitle}) : super(key: key);
 
@@ -16,6 +20,30 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   int _selectedIndex = 1;
+  final String searchId = "ChIJuc46ohEE9YgRyY2WKddJ4OY";
+  Future<DialysisInfo> futureDialysisInfo;
+  DialysisInfoService dialysisInfoService;
+  String name;
+  String address;
+  String phoneNum;
+  String openingHours;
+
+  @override
+  void initState() {
+    super.initState();
+    print('Hello');
+    dialysisInfoService = new DialysisInfoService();
+    futureDialysisInfo = dialysisInfoService.getDialysisCenterInfo(searchId);
+    futureDialysisInfo.then((value) {
+      name = value.name;
+      address = value.address;
+      phoneNum = value.phoneNum;
+      openingHours = value.openingHours;
+    }, onError: (e) {
+      print(e);
+    });
+    print(name);
+  }
 
   @override
   Widget build(BuildContext context) {

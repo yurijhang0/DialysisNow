@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: MapScreen()//,
+      home: Dashboard()//,
       // routes: <String, WidgetBuilder> {
       //   '/signup': (BuildContext context) =>  SignUpPage(),
       //   '/signin': (BuildContext context) =>  SignInPage(),
