@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fryo/src/screens/MapScreen.dart';
+import 'package:fryo/src/screens/InfoScreen.dart';
 import './src/screens/SignInPage.dart';
 import './src/screens/SignUpPage.dart';
 import './src/screens/HomePage.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: Dashboard()//,
+      home: InfoScreen()//, // just for testing
       // routes: <String, WidgetBuilder> {
       //   '/signup': (BuildContext context) =>  SignUpPage(),
       //   '/signin': (BuildContext context) =>  SignInPage(),

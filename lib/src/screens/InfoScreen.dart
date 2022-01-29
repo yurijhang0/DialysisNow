@@ -1,95 +1,95 @@
-import 'package:flutter/material.dart';
-import 'package:fryo/src/services/DialysisInfoService.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../shared/styles.dart';
-import '../shared/colors.dart';
-import '../shared/fryo_icons.dart';
-import './ReportScreen.dart';
-import 'package:fryo/src/services/DialysisInfo.dart';
+
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:fryo/src/services/DialysisInfo.dart';
+import 'package:fryo/src/services/DialysisInfoService.dart';
+import 'package:fryo/src/shared/colors.dart';
+import 'package:fryo/src/shared/fryo_icons.dart';
+import 'package:fryo/src/shared/styles.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class Dashboard extends StatefulWidget {
+import 'ReportScreen.dart';
+
+class InfoScreen extends StatefulWidget {
   final String pageTitle;
-  final id = 'ChIJuc46ohEE9YgRyY2WKddJ4OY'; // test dialysis center id
 
-  Dashboard({Key key, this.pageTitle}) : super(key: key);
-
+  InfoScreen({Key key, this.pageTitle}) : super(key: key);
+  
   @override
-  _DashboardState createState() => _DashboardState();
+  _InfoScreenState createState() => _InfoScreenState();
+
 }
 
-class _DashboardState extends State<Dashboard> {
+class _InfoScreenState extends State<InfoScreen> {
   int _selectedIndex = 1;
-  final String searchId = "ChIJuc46ohEE9YgRyY2WKddJ4OY";
-  Future<DialysisInfo> futureDialysisInfo;
   DialysisInfoService dialysisInfoService;
-  String name;
-  String address;
-  String phoneNum;
-  String openingHours;
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  final id = 'ChIJuc46ohEE9YgRyY2WKddJ4OY';
 
   @override
   Widget build(BuildContext context) {
-    dialysisInfoService = new DialysisInfoService();
-    futureDialysisInfo = dialysisInfoService.getDialysisCenterInfo(searchId);
-    futureDialysisInfo.then((value) { // sometimes errors
-      name = value.name;
-      address = value.address;
-      phoneNum = value.phoneNum;
-      openingHours = value.openingHours;
-    }, onError: (e) {
-      print(e);
-    });
-    // log(name);
-    // log(address);
     final _tabs = [
       Text('Search Feature Currently Unavailable'),
       infoTab(context),
       Text('Resources Feature Currently Unavailable'),
     ];
-
-    return Scaffold(
-        backgroundColor: bgColor,
-        appBar: AppBar(
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: primaryColor,
-          title:
-          Text('DialysisNow', textAlign: TextAlign.center),
-        ),
-        body: _tabs[_selectedIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-                icon: Icon(Fryo.search),
-                title: Text(
-                  'Search',
-                  style: tabLinkStyle,
-                )),
-            BottomNavigationBarItem(
-                icon: Icon(Fryo.star),
-                title: Text(
-                  'Main Center',
-                  style: tabLinkStyle,
-                )),
-            BottomNavigationBarItem(
-                icon: Icon(Fryo.alarm),
-                title: Text(
-                  'Resources',
-                  style: tabLinkStyle,
-                )),
-          ],
-          currentIndex: _selectedIndex,
-          type: BottomNavigationBarType.fixed,
-          fixedColor: Colors.green[600],
-          onTap: _onItemTapped,
-        ));
+    dialysisInfoService = new DialysisInfoService();
+    return FutureBuilder<DialysisInfo>(
+      future: dialysisInfoService.getDialysisCenterInfo(id),
+      builder: (BuildContext context,
+          AsyncSnapshot<DialysisInfo> snapshot) { // AsyncSnapshot<DialysisInfo>
+        if (snapshot.connectionState ==
+            ConnectionState.waiting) { // loading state -- create load screen
+          return Center(child: Text('Please wait its loading...'));
+        } else {
+          if (snapshot
+              .hasError) { // failure for API request -- create error screen
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else { // got API request -- create main info screen
+            log(snapshot.data.phoneNum);
+            return Scaffold(
+                backgroundColor: bgColor,
+                appBar: AppBar(
+                  centerTitle: true,
+                  elevation: 0,
+                  backgroundColor: primaryColor,
+                  title:
+                  Text('DialysisNow', textAlign: TextAlign.center),
+                ),
+                body: _tabs[_selectedIndex],
+                bottomNavigationBar: BottomNavigationBar(
+                  items: <BottomNavigationBarItem>[
+                    BottomNavigationBarItem(
+                        icon: Icon(Fryo.search),
+                        title: Text(
+                          'Search',
+                          style: tabLinkStyle,
+                        )),
+                    BottomNavigationBarItem(
+                        icon: Icon(Fryo.star),
+                        title: Text(
+                          'Main Center',
+                          style: tabLinkStyle,
+                        )),
+                    BottomNavigationBarItem(
+                        icon: Icon(Fryo.alarm),
+                        title: Text(
+                          'Resources',
+                          style: tabLinkStyle,
+                        )),
+                  ],
+                  currentIndex: _selectedIndex,
+                  type: BottomNavigationBarType.fixed,
+                  fixedColor: Colors.green[600],
+                  onTap: _onItemTapped,
+                ));
+            return Center(child: new Text('${snapshot
+                .data}')); // snapshot.data  :- get your object which is pass from your getDialysisCenterInfo() function
+          }
+        }
+      },
+    );
   }
 
   void _onItemTapped(int index) {
@@ -146,7 +146,7 @@ Widget headerTopCategories(BuildContext context) {
               Navigator.push(context, MaterialPageRoute(builder: (context) => ReportScreen()));
             }),
             headerCategoryItem('Call', Fryo.phone, onPressed: () =>
-              launch("tel://8665446741")
+                launch("tel://8665446741")
             ),
             headerCategoryItem('Navigate', Fryo.map, onPressed: () => launch("http://flutter.dev")),
           ],
@@ -384,3 +384,7 @@ Widget report() {
             ])),
   );
 }
+
+
+
+
