@@ -1,6 +1,4 @@
-
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fryo/src/services/DialysisInfo.dart';
@@ -47,7 +45,7 @@ class _InfoScreenState extends State<InfoScreen> {
           } else { // got API request -- create main info screen
             snapshot2 = snapshot;
             log(snapshot2.data.phoneNum);
-            log(snapshot2.data.phoneNum);
+            // log(snapshot2.data.imageURL);
             return Scaffold(
                 backgroundColor: bgColor,
                 appBar: AppBar(
@@ -102,7 +100,6 @@ class _InfoScreenState extends State<InfoScreen> {
   }
 
   Widget infoTab(BuildContext context) {
-    log("hello");
     return ListView(children: <Widget>[
       Image.asset(
         "images/CenterBuilding.jpeg", height: 150, fit: BoxFit.fitWidth,),
@@ -276,7 +273,7 @@ class _InfoScreenState extends State<InfoScreen> {
             children: <Widget>[
               Text("Location:",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-              Text("3620 M.L.K. Jr Dr SW, Atlanta, GA 30331",
+              Text(snapshot2.data.address,
                   style: TextStyle(fontSize: 15)),
               SizedBox(
                   height: 15
