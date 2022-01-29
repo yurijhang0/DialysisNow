@@ -32,11 +32,6 @@ class _InfoScreenState extends State<InfoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final _tabs = [
-    //   Text('Search Feature Currently Unavailable'),
-    //   infoTab(context),
-    //   Text('Resources Feature Currently Unavailable'),
-    // ];
     dialysisInfoService = new DialysisInfoService();
     return FutureBuilder<DialysisInfo>(
       future: dialysisInfoService.getDialysisCenterInfo(id),
