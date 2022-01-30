@@ -12,8 +12,9 @@ import 'ReportScreen.dart';
 
 class InfoScreen extends StatefulWidget {
   final String pageTitle;
+  final bool closureBool;  // bool for closure status
 
-  InfoScreen({Key key, this.pageTitle}) : super(key: key);
+  InfoScreen({Key key, this.pageTitle, this.closureBool}) : super(key: key);
   
   @override
   _InfoScreenState createState() => _InfoScreenState();
@@ -23,7 +24,7 @@ class InfoScreen extends StatefulWidget {
 class _InfoScreenState extends State<InfoScreen> {
   int _selectedIndex = 1;
   DialysisInfoService dialysisInfoService;
-  final id = 'ChIJuc46ohEE9YgRyY2WKddJ4OY';
+  final id = 'ChIJeUB4tj6i9YgR9L8rHLcJ01A'; // place id EDIT FOR DEMO
 
   // get request fields
   AsyncSnapshot<DialysisInfo> snapshot2;
@@ -44,6 +45,7 @@ class _InfoScreenState extends State<InfoScreen> {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else { // got API request -- create main info screen
             snapshot2 = snapshot;
+            log(widget.closureBool.toString());
             // log(snapshot2.data.imageURL);
             return Scaffold(
                 backgroundColor: bgColor,
@@ -230,18 +232,18 @@ class _InfoScreenState extends State<InfoScreen> {
                   SizedBox(
                       width: 10
                   ),
-                  Container(
-                      width: 100.0,
-                      height: 100.0,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: new NetworkImage(
-                                  "https://www.smileamilepainting.com/wp-content/uploads/2018/12/Davita-Care-Clinic-1024x614.jpg")
-                          )
-                      )
-                  ),
+                  // Container(         // THIS IS FOR THE LOGO IMAGE!!!!
+                  //     width: 100.0,
+                  //     height: 100.0,
+                  //     decoration: BoxDecoration(
+                  //         shape: BoxShape.circle,
+                  //         image: DecorationImage(
+                  //             fit: BoxFit.fill,
+                  //             image: new NetworkImage(
+                  //                 "https://www.smileamilepainting.com/wp-content/uploads/2018/12/Davita-Care-Clinic-1024x614.jpg")
+                  //         )
+                  //     )
+                  // ),
                   SizedBox(
                       width: 10
                   ),
@@ -285,7 +287,7 @@ class _InfoScreenState extends State<InfoScreen> {
               ),
               Text("Center Status:",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-              (snapshot2.data.status ? Text("OPEN", style: TextStyle(fontSize: 15)) : Text("CLOSED", style: TextStyle(fontSize: 15))),
+              (snapshot2.data.status && widget.closureBool ? Text("OPEN", style: TextStyle(fontSize: 15)) : Text("CLOSED", style: TextStyle(fontSize: 15))),
               SizedBox(
                   height: 15
               ),

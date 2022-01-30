@@ -9,7 +9,6 @@ class DialysisInfo {
   final bool status;
   final List<dynamic> openingHours;
   final String imageRef;
-  final String imageURL;
 
 
   DialysisInfo({
@@ -19,7 +18,6 @@ class DialysisInfo {
     this.status,
     this.openingHours,
     this.imageRef,
-    this.imageURL
   });
 
   factory DialysisInfo.fromJson(Map<String, dynamic> json) {
