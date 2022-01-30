@@ -108,6 +108,7 @@ class _InfoScreenState extends State<InfoScreen> {
             '&key=AIzaSyBZZvJlR5JkiBo_5mSKYvBFoxFg2noE1VA', height: 150, fit: BoxFit.fitWidth,),
       mainInfo(),
       headerTopCategories(context),
+      report(),
       medicalInfo(),
     ]);
   }
@@ -319,24 +320,30 @@ class _InfoScreenState extends State<InfoScreen> {
   }
 
   Widget report() {
-    return Container(
-      padding: new EdgeInsets.all(20.0),
-      child: Container(
-          decoration: BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.all(Radius.circular(10.0))),
-          child: Column(
-              children: <Widget>[new Text("WARNING:",
-                style: TextStyle(color: Colors.white, fontSize: 20),
-                textAlign: TextAlign.center,),
-                new Text("CENTER MAY BE CLOSED",
+    bool currClosureBool = widget.closureBool ?? false;
+    if (currClosureBool) {
+      return Container(
+        padding: new EdgeInsets.all(20.0),
+        child: Container(
+            decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            child: Column(
+                children: <Widget>[new Text("WARNING:",
                   style: TextStyle(color: Colors.white, fontSize: 20),
                   textAlign: TextAlign.center,),
-                new Text("DUE TO INTERNAL REASONS",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                  textAlign: TextAlign.center,)
-              ])),
-    );
+                  new Text("CENTER MAY BE CLOSED",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    textAlign: TextAlign.center,),
+                  new Text("ACCORDING TO USER REPORTS",
+                    // FIX THIS LATER TO INCLUDE REASON
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    textAlign: TextAlign.center,)
+                ])),
+      );
+    } else {
+      return Container();
+    }
   }
 
   String formatPhoneNum() {
