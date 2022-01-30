@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fryo/src/screens/InfoScreen.dart';
-//import '../shared/styles.dart';
 import '../shared/colors.dart';
-import '../shared/fryo_icons.dart';
-//import './ProductPage.dart';
-//import '../shared/Product.dart';
-//import '../shared/partials.dart';
 
 class ReportScreen extends StatefulWidget {
   final String pageTitle;
