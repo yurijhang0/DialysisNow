@@ -6,7 +6,8 @@ class DialysisInfo {
   final String name;
   final String address;
   final String phoneNum;
-  final String openingHours;
+  final bool status;
+  final List<dynamic> openingHours;
   final String imageRef;
   final String imageURL;
 
@@ -15,6 +16,7 @@ class DialysisInfo {
     this.name,
     this.address,
     this.phoneNum,
+    this.status,
     this.openingHours,
     this.imageRef,
     this.imageURL
@@ -25,7 +27,8 @@ class DialysisInfo {
       name: json['result']['name'].toString(),
       address: json['result']['formatted_address'].toString(),
       phoneNum: json['result']['formatted_phone_number'].toString(),
-      openingHours: json['result']['opening_hours']['weekday_text'].toString(),
+      status: json['result']['opening_hours']['open_now'],
+      openingHours: json['result']['opening_hours']['weekday_text'],
       imageRef: json['result']['photos'][0]['photo_reference'].toString()
     );
   }
