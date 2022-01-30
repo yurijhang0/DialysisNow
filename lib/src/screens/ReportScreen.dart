@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fryo/src/screens/Dashboard.dart';
-//import '../shared/styles.dart';
+import 'package:fryo/src/screens/InfoScreen.dart';
 import '../shared/colors.dart';
-import '../shared/fryo_icons.dart';
-//import './ProductPage.dart';
-//import '../shared/Product.dart';
-//import '../shared/partials.dart';
-import './UpdatedScreen.dart';
 
 class ReportScreen extends StatefulWidget {
   final String pageTitle;
@@ -19,6 +13,22 @@ class ReportScreen extends StatefulWidget {
 
 class _ReportScreenState extends State<ReportScreen> {
   int _selectedIndex = 0;
+  // text controller for retrieving current value of TextField
+  final textController = TextEditingController();
+  // vars for reasoning of closure
+  var powerOutageBool = false;
+  var hurricaneBool = false;
+  var waterContaminationBool = false;
+  var internalBool = false;
+  var otherBool = false;
+  var additionalInfo = Text("");
+
+  @override
+  void dispose() {
+    // clean controller when widget disposed
+    textController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +82,7 @@ class _ReportScreenState extends State<ReportScreen> {
                       shape: CircleBorder(),
                       child: Icon(Icons.power_off),
                       onPressed: (){
+                        powerOutageBool = true;
                       },
                     ),
                   )
@@ -83,7 +94,9 @@ class _ReportScreenState extends State<ReportScreen> {
                       child: FloatingActionButton(
                         shape: CircleBorder(),
                         child: Icon(Icons.storm),
-                        onPressed: (){},
+                        onPressed: (){
+                          hurricaneBool = true;
+                        },
                       ),
                     )
                 ),
@@ -94,7 +107,9 @@ class _ReportScreenState extends State<ReportScreen> {
                       child: FloatingActionButton(
                         shape: CircleBorder(),
                         child: Icon(Icons.water_damage),
-                        onPressed: (){},
+                        onPressed: (){
+                          waterContaminationBool = true;
+                        },
                       ),
                     )
                 ),
@@ -163,7 +178,9 @@ class _ReportScreenState extends State<ReportScreen> {
                       child: FloatingActionButton(
                         shape: CircleBorder(),
                         child: Icon(Icons.warning_amber),
-                        onPressed: (){},
+                        onPressed: (){
+                          internalBool = true;
+                        },
                       ),
                     )
                 ),
@@ -174,7 +191,9 @@ class _ReportScreenState extends State<ReportScreen> {
                       child: FloatingActionButton(
                         shape: CircleBorder(),
                         child: Icon(Icons.note),
-                        onPressed: (){},
+                        onPressed: (){
+                          otherBool = true;
+                        },
                       ),
                     )
                 ),
@@ -221,6 +240,7 @@ class _ReportScreenState extends State<ReportScreen> {
             ),
             SizedBox(height: 10),
             TextField(
+              controller: textController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Enter additional information',
@@ -246,7 +266,13 @@ class _ReportScreenState extends State<ReportScreen> {
                 ),
                 TextButton(
                   onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => UpdatedScreen()));
+                    additionalInfo = Text(textController.text);
+                    // TEMPORARY CLOSURE REPORT!! WILL USE DATABASE LATER
+                    bool closureBool = false;
+                    if (powerOutageBool || hurricaneBool || waterContaminationBool ||internalBool || otherBool || additionalInfo.data != "") {
+                      closureBool = true;
+                    }
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => InfoScreen(closureBool: closureBool)));
                   },
                   child:
                   const Text(

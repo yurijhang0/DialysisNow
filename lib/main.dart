@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import './src/screens/SignInPage.dart';
-import './src/screens/SignUpPage.dart';
-import './src/screens/HomePage.dart';
-import './src/screens/Dashboard.dart';
-import './src/screens/ProductPage.dart';
-
-
+import 'package:fryo/src/screens/MapScreen.dart';
+import 'package:fryo/src/screens/InfoScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,13 +13,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: HomePage(pageTitle: 'Welcome'),
-      routes: <String, WidgetBuilder> {
-        '/signup': (BuildContext context) =>  SignUpPage(),
-        '/signin': (BuildContext context) =>  SignInPage(),
-        '/dashboard': (BuildContext context) => Dashboard(),
-        '/productPage': (BuildContext context) => ProductPage(),
-      },
+      home: InfoScreen()//, // just for testing
+      // routes: <String, WidgetBuilder> {
+      //   '/signup': (BuildContext context) =>  SignUpPage(),
+      //   '/signin': (BuildContext context) =>  SignInPage(),
+      //   '/dashboard': (BuildContext context) => Dashboard(),
+      //   '/productPage': (BuildContext context) => ProductPage(),
+      // },
     );
   }
 }
