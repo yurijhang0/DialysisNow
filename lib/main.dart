@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fryo/src/screens/MapScreen.dart';
 import 'package:fryo/src/screens/InfoScreen.dart';
-import './src/screens/SignInPage.dart';
-import './src/screens/SignUpPage.dart';
-import './src/screens/HomePage.dart';
-import './src/screens/Dashboard.dart';
-import './src/screens/ProductPage.dart';
-
-
 
 void main() => runApp(MyApp());
 
