@@ -181,7 +181,7 @@ class _ReportScreenState extends State<ReportScreen> {
                       child: FloatingActionButton(
                         shape: CircleBorder(),
                         backgroundColor: Colors.green[200],
-                        child: Icon(Icons.warning_amber, color: Colors.black87),
+                        child: Icon(Icons.warning_amber_outlined, color: Colors.black87),
                         onPressed: (){
                           internalBool = true;
                         },
@@ -195,7 +195,7 @@ class _ReportScreenState extends State<ReportScreen> {
                       child: FloatingActionButton(
                         shape: CircleBorder(),
                         backgroundColor: Colors.green[200],
-                        child: Icon(Icons.note, color: Colors.black87),
+                        child: Icon(Icons.note_outlined, color: Colors.black87),
                         onPressed: (){
                           otherBool = true;
                         },
