@@ -266,6 +266,7 @@ class _InfoScreenState extends State<InfoScreen> {
   }
 
   Widget medicalInfo() {
+    bool currClosureBool = widget.closureBool ?? false;
     return Container(
         padding: new EdgeInsets.all(20.0),
         color: bgColor,
@@ -288,7 +289,7 @@ class _InfoScreenState extends State<InfoScreen> {
               ),
               Text("Center Status:",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-              //(snapshot2.data.status && widget.closureBool ? Text("OPEN", style: TextStyle(fontSize: 15)) : Text("CLOSED", style: TextStyle(fontSize: 15))),
+              (snapshot2.data.status && !currClosureBool ? Text("OPEN", style: TextStyle(fontSize: 15)) : Text("CLOSED", style: TextStyle(fontSize: 15))),
               SizedBox(
                   height: 15
               ),
