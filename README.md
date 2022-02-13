@@ -10,7 +10,9 @@ users the capability to report closures of certain dialysis centers
 during times of crisis. This will allow other users to avoid wasting
 valuable time searching a multitude of centers to find treatment.
 
-# Release Notes for Version 0.1.0
+# Release Notes
+
+## Version 0.1.0
 
 ### New Features
 * **Feature 1:** Linked the Google Places API to the application to provide
