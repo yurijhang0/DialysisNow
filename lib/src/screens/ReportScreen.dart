@@ -66,7 +66,7 @@ class _ReportScreenState extends State<ReportScreen> {
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
-                color: Colors.green,
+                color: Colors.black87,
               ),
               //textAlign: TextAlign.center,
             ),
@@ -80,7 +80,8 @@ class _ReportScreenState extends State<ReportScreen> {
                   child: FittedBox(
                     child: FloatingActionButton(
                       shape: CircleBorder(),
-                      child: Icon(Icons.power_off),
+                      backgroundColor: Colors.green[100],
+                      child: Icon(Icons.power_off_outlined, color: Colors.black87),
                       onPressed: (){
                         powerOutageBool = true;
                       },
@@ -93,7 +94,8 @@ class _ReportScreenState extends State<ReportScreen> {
                     child: FittedBox(
                       child: FloatingActionButton(
                         shape: CircleBorder(),
-                        child: Icon(Icons.storm),
+                        backgroundColor: Colors.green[100],
+                        child: Icon(Icons.storm, color: Colors.black87),
                         onPressed: (){
                           hurricaneBool = true;
                         },
@@ -106,7 +108,8 @@ class _ReportScreenState extends State<ReportScreen> {
                     child: FittedBox(
                       child: FloatingActionButton(
                         shape: CircleBorder(),
-                        child: Icon(Icons.water_damage),
+                        backgroundColor: Colors.green[100],
+                        child: Icon(Icons.water_damage_outlined, color: Colors.black87),
                         onPressed: (){
                           waterContaminationBool = true;
                         },
@@ -126,7 +129,7 @@ class _ReportScreenState extends State<ReportScreen> {
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      color: Colors.green,
+                      color: Colors.black87,
                     ),
                   )
                 ),
@@ -137,7 +140,7 @@ class _ReportScreenState extends State<ReportScreen> {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: Colors.green,
+                        color: Colors.black87,
                       ),
                     )
                 ),
@@ -150,7 +153,7 @@ class _ReportScreenState extends State<ReportScreen> {
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            color: Colors.green,
+                            color: Colors.black87,
                           ),
                         ),
                         Text(
@@ -159,7 +162,7 @@ class _ReportScreenState extends State<ReportScreen> {
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            color: Colors.green,
+                            color: Colors.black87,
                           ),
                         )
                       ],
@@ -177,7 +180,8 @@ class _ReportScreenState extends State<ReportScreen> {
                     child: FittedBox(
                       child: FloatingActionButton(
                         shape: CircleBorder(),
-                        child: Icon(Icons.warning_amber),
+                        backgroundColor: Colors.green[100],
+                        child: Icon(Icons.warning_amber_outlined, color: Colors.black87),
                         onPressed: (){
                           internalBool = true;
                         },
@@ -190,7 +194,8 @@ class _ReportScreenState extends State<ReportScreen> {
                     child: FittedBox(
                       child: FloatingActionButton(
                         shape: CircleBorder(),
-                        child: Icon(Icons.note),
+                        backgroundColor: Colors.green[100],
+                        child: Icon(Icons.note_outlined, color: Colors.black87),
                         onPressed: (){
                           otherBool = true;
                         },
@@ -210,7 +215,7 @@ class _ReportScreenState extends State<ReportScreen> {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: Colors.green,
+                        color: Colors.black87,
                       ),
                     )
                 ),
@@ -221,7 +226,7 @@ class _ReportScreenState extends State<ReportScreen> {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: Colors.green,
+                        color: Colors.black87,
                       ),
                     )
                 ),

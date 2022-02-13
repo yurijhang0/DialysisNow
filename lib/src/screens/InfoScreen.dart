@@ -24,7 +24,7 @@ class InfoScreen extends StatefulWidget {
 class _InfoScreenState extends State<InfoScreen> {
   int _selectedIndex = 1;
   DialysisInfoService dialysisInfoService;
-  final id = 'ChIJeUB4tj6i9YgR9L8rHLcJ01A'; // place id EDIT FOR DEMO
+  final id = 'ChIJuc46ohEE9YgRyY2WKddJ4OY'; // place id EDIT FOR DEMO
 
   // get request fields
   AsyncSnapshot<DialysisInfo> snapshot2;
@@ -45,7 +45,6 @@ class _InfoScreenState extends State<InfoScreen> {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else { // got API request -- create main info screen
             snapshot2 = snapshot;
-            log(widget.closureBool.toString());
             // log(snapshot2.data.imageURL);
             return Scaffold(
                 backgroundColor: bgColor,
@@ -140,7 +139,7 @@ class _InfoScreenState extends State<InfoScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        SizedBox(height: 10),
+        SizedBox(height: 20),
         SizedBox(
           height: 130,
           child: ListView(
@@ -154,7 +153,7 @@ class _InfoScreenState extends State<InfoScreen> {
               headerCategoryItem('Call', Fryo.phone, onPressed: () =>
                   launch("tel://" + formattedPhoneNum)
               ),
-              headerCategoryItem('Navigate', Fryo.map,
+              headerCategoryItem('Maps', Fryo.map,
                   onPressed: () => launch("https://www.google.com/maps/search/?api=1&query=" + snapshot2.data.name.replaceAll(" ", "+") + "&query_place_id=" + id)),
             ],
           ),
@@ -178,10 +177,11 @@ class _InfoScreenState extends State<InfoScreen> {
                 shape: CircleBorder(),
                 heroTag: name,
                 onPressed: onPressed,
-                backgroundColor: white,
+                backgroundColor: Colors.green[100],
                 child: Icon(icon, size: 35, color: Colors.black87),
               )),
-          Text(name + ' ›', style: categoryText)
+          Text(name + ' ›', style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 20))
         ],
       ),
     );
@@ -266,6 +266,7 @@ class _InfoScreenState extends State<InfoScreen> {
   }
 
   Widget medicalInfo() {
+    bool currClosureBool = widget.closureBool ?? false;
     return Container(
         padding: new EdgeInsets.all(20.0),
         color: bgColor,
@@ -288,7 +289,7 @@ class _InfoScreenState extends State<InfoScreen> {
               ),
               Text("Center Status:",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-              (snapshot2.data.status && widget.closureBool ? Text("OPEN", style: TextStyle(fontSize: 15)) : Text("CLOSED", style: TextStyle(fontSize: 15))),
+              (snapshot2.data.status && !currClosureBool ? Text("OPEN", style: TextStyle(fontSize: 15)) : Text("CLOSED", style: TextStyle(fontSize: 15))),
               SizedBox(
                   height: 15
               ),
