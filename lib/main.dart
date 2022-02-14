@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: InfoScreen()//, // just for testing
+      home: MapScreen()//, // just for testing
       // routes: <String, WidgetBuilder> {
       //   '/signup': (BuildContext context) =>  SignUpPage(),
       //   '/signin': (BuildContext context) =>  SignInPage(),

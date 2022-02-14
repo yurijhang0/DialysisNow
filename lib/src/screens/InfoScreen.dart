@@ -22,7 +22,7 @@ class InfoScreen extends StatefulWidget {
 }
 
 class _InfoScreenState extends State<InfoScreen> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 1; // edit later when connecting the screens
   DialysisInfoService dialysisInfoService;
   final id = 'ChIJuc46ohEE9YgRyY2WKddJ4OY'; // place id EDIT FOR DEMO
 
