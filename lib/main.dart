@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fryo/src/screens/MapScreen.dart';
 import 'package:fryo/src/screens/InfoScreen.dart';
-import 'package:fryo/src/services/LocationService.dart';
+import 'package:fryo/src/services/ApplicationBloc.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => LocationService(),
+      create: (context) => ApplicationBloc(),
       child: MaterialApp(
           title: 'Fryo',
           theme: ThemeData(

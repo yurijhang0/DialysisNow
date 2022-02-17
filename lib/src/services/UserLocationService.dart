@@ -1,12 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:geolocator/geolocator.dart';
 
-class LocationService with ChangeNotifier {
-  Position currLocation;
-
-  LocationService() {
-    setCurrLocation();
-  }
+class UserLocationService {
   // get user's current location
   Future<Position> getCurrentLocation() async {
     bool serviceEnabled;
@@ -45,10 +39,4 @@ class LocationService with ChangeNotifier {
     );
     return response;
   }
-
-  setCurrLocation() async {
-    currLocation = await getCurrentLocation();
-    notifyListeners();
-  }
-
 }
