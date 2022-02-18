@@ -43,26 +43,6 @@ class _MapScreenState extends State<MapScreen> {
                   hintText: 'Enter additional information',
                 ),
               ),
-              Flexible(
-                // height: MediaQuery.of(context).size.height - 196.0, // hardcoded this but is there a way to get navbar height?????
-                child: GoogleMap(
-                  mapType: MapType.normal,
-                  myLocationEnabled: true,
-                  initialCameraPosition: CameraPosition(
-                      target: LatLng(applicationBloc.currLocation.latitude,
-                          applicationBloc.currLocation.longitude),
-                      zoom: 14),
-                )
-              ),
-                if (applicationBloc.dialysisSearchList != null &&
-                    applicationBloc.dialysisSearchList.length != 0)
-                  Container(
-                    height: 300.0,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                    ),
-                  ),
                 if (applicationBloc.dialysisSearchList != null &&
                     applicationBloc.dialysisSearchList.length != 0)
                   Container(
@@ -78,7 +58,27 @@ class _MapScreenState extends State<MapScreen> {
                             );
                           }
                       )
-                  )
+                  ),
+              Flexible(
+                // height: MediaQuery.of(context).size.height - 196.0, // hardcoded this but is there a way to get navbar height?????
+                child: GoogleMap(
+                  mapType: MapType.normal,
+                  myLocationEnabled: true,
+                  initialCameraPosition: CameraPosition(
+                      target: LatLng(applicationBloc.currLocation.latitude,
+                          applicationBloc.currLocation.longitude),
+                      zoom: 14),
+                )
+              ),
+                // if (applicationBloc.dialysisSearchList != null &&
+                //     applicationBloc.dialysisSearchList.length != 0)
+                //   Container(
+                //     height: 300.0,
+                //     width: double.infinity,
+                //     decoration: BoxDecoration(
+                //       color: Colors.black,
+                //     ),
+                //   ),
             ]
           )]
         ),
