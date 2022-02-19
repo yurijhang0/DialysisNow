@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:fryo/src/services/ApplicationBloc.dart';
+import 'package:fryo/src/services/DialysisInfo.dart';
 import 'package:fryo/src/shared/colors.dart';
 import 'package:fryo/src/shared/fryo_icons.dart';
 import 'package:fryo/src/shared/styles.dart';
@@ -14,11 +15,39 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   int _selectedIndex = 1; // edit later when connecting the screens
-  ApplicationBloc applicationBloc;
+
+  // controller for Google Maps
+  Completer<GoogleMapController> _mapController = Completer();
+  StreamSubscription centerSubscription;
+
+  @override
+  void initState() {
+    final applicationBloc = Provider.of<ApplicationBloc>(context,
+        listen: false);
+    centerSubscription =
+        applicationBloc.selectedDialysisCenterStream.stream.listen((location) {
+      if (location != null) {
+        // applicationBloc.setSelectedCenterMarker(buildContext);
+        setMapLocation(location);
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {  // widget closed -> dispose of streams
+    final applicationBloc = Provider.of<ApplicationBloc>(context,
+        listen: false);
+    applicationBloc.dispose();
+    centerSubscription.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    applicationBloc = Provider.of<ApplicationBloc>(context); // get context from main.dart and notifier
+    // get context from main.dart and notifier
+    final applicationBloc = Provider.of<ApplicationBloc>(context);
+    applicationBloc.setSelectedCenterMarker(context);
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
@@ -40,45 +69,46 @@ class _MapScreenState extends State<MapScreen> {
                 onChanged: (value) => applicationBloc.searchPlaces(value),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Enter additional information',
+                  hintText: 'Enter address or name',
                 ),
               ),
                 if (applicationBloc.dialysisSearchList != null &&
                     applicationBloc.dialysisSearchList.length != 0)
-                  Container(
-                      height: 300.0,
-                      child: ListView.builder(
-                          itemCount: applicationBloc.dialysisSearchList.length,
-                          itemBuilder: (context, index) {
-                            return ListTile(
-                                title: Text(
-                                    applicationBloc.dialysisSearchList[index].description,
-                                    style: TextStyle(color: Colors.blue)
-                                )
-                            );
-                          }
-                      )
-                  ),
+                      Container(
+                          height: 300.0,
+                          child: ListView.builder(
+                              itemCount: applicationBloc.dialysisSearchList.length,
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                  title: Text(
+                                      applicationBloc.dialysisSearchList[index].description,
+                                      style: TextStyle(color: Colors.blue)
+                                  ),
+                                  onTap: () { // select a result
+                                    applicationBloc.setSelectedDialysisCenter(
+                                      applicationBloc.dialysisSearchList[index].placeId
+                                    );
+                                  }
+                                );
+                              }
+                          )
+                      ),
               Flexible(
                 // height: MediaQuery.of(context).size.height - 196.0, // hardcoded this but is there a way to get navbar height?????
                 child: GoogleMap(
                   mapType: MapType.normal,
+                  markers: Set.from(applicationBloc.markers),
                   myLocationEnabled: true,
                   initialCameraPosition: CameraPosition(
                       target: LatLng(applicationBloc.currLocation.latitude,
                           applicationBloc.currLocation.longitude),
-                      zoom: 14),
+                      zoom: 14,
+                  ),
+                  onMapCreated: (GoogleMapController controller) {
+                    _mapController.complete(controller);
+                  },
                 )
               ),
-                // if (applicationBloc.dialysisSearchList != null &&
-                //     applicationBloc.dialysisSearchList.length != 0)
-                //   Container(
-                //     height: 300.0,
-                //     width: double.infinity,
-                //     decoration: BoxDecoration(
-                //       color: Colors.black,
-                //     ),
-                //   ),
             ]
           )]
         ),
@@ -127,5 +157,17 @@ class _MapScreenState extends State<MapScreen> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  Future<void> setMapLocation(DialysisInfo location) async {  // wait for controller object
+    final GoogleMapController controller = await _mapController.future;
+    controller.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: LatLng(location.lat, location.lng), // set to center's location
+          zoom: 14.0
+        )
+      )
+    );
   }
 }

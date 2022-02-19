@@ -13,8 +13,10 @@ import 'ReportScreen.dart';
 class InfoScreen extends StatefulWidget {
   final String pageTitle;
   final bool closureBool;  // bool for closure status
+  final String placeID;
 
-  InfoScreen({Key key, this.pageTitle, this.closureBool}) : super(key: key);
+  InfoScreen({Key key, this.pageTitle, this.closureBool, this.placeID})
+      : super(key: key);
   
   @override
   _InfoScreenState createState() => _InfoScreenState();
@@ -33,7 +35,7 @@ class _InfoScreenState extends State<InfoScreen> {
   Widget build(BuildContext context) {
     dialysisInfoService = new DialysisInfoService();
     return FutureBuilder<DialysisInfo>(
-      future: dialysisInfoService.getDialysisCenterInfo(id),
+      future: dialysisInfoService.getDialysisCenterInfo(widget.placeID),
       builder: (BuildContext context,
           AsyncSnapshot<DialysisInfo> snapshot) { // AsyncSnapshot<DialysisInfo>
         if (snapshot.connectionState ==

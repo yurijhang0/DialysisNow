@@ -1,6 +1,9 @@
 import 'package:geolocator/geolocator.dart';
 
-class UserLocationService {
+/**
+ * GoogleMap API requests for setting location marker
+ */
+class LocationService {
   // get user's current location
   Future<Position> getCurrentLocation() async {
     bool serviceEnabled;
