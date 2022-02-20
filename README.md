@@ -12,8 +12,24 @@ valuable time searching a multitude of centers to find treatment.
 
 ## Release Notes for Version 0.1.0
 
+### Version 0.2.0
+#### New Features:
+* **Feature 1:** A user is able to search for locations by name, thus rendering their relevant medical information.
+
+* **Feature 2:** The map marker is able to set to the user's selection from their search results.
+
+* **Feature 3:** Set up the MongoDB database for future reporting capabilities.
+
+#### Bug Fixes
+* Crowding on map screen
+
+#### Known Issues
+* N/A
+
+##
+
 ### Version 0.1.0
-#### New Features
+#### New Features:
 * **Feature 1:** Linked the Google Places API to the application to provide
   navigational services and features.
 
