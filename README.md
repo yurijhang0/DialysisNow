@@ -14,11 +14,15 @@ valuable time searching a multitude of centers to find treatment.
 
 ### Version 0.2.0
 #### New Features:
-* **Feature 1:** A user is able to search for locations by name, thus rendering their relevant medical information.
+* **Feature 1:** Map view to displayer dialysis center within a map screen.
 
-* **Feature 2:** The map marker is able to set to the user's selection from their search results.
+* **Feature 2:** A user is able to search for dialysis care centers by name or address keywords which yields a list view of resulting dialysis care centers.
 
-* **Feature 3:** Set up the MongoDB database for future reporting capabilities.
+* **Feature 3:** The map marker is first set to the user's location and then set to the chosen dialysis care center.
+
+* **Feature 4:** The map marker can be clicked for the info screen for the center's information.
+
+* **Feature 5:** Set up the MongoDB database for future reporting capabilities.
 
 #### Bug Fixes
 * Crowding on map screen
