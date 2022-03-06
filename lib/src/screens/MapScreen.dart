@@ -72,7 +72,8 @@ class _MapScreenState extends State<MapScreen> {
                   hintText: 'Enter address or name',
                 ),
               ),
-                if (applicationBloc.dialysisSearchList != null &&
+                if (
+                applicationBloc.dialysisSearchList != null &&
                     applicationBloc.dialysisSearchList.length != 0)
                       Container(
                           height: 300.0,

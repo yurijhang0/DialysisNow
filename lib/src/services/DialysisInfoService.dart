@@ -36,6 +36,8 @@ class DialysisInfoService {
   Future<List<DialysisIDDescription>> dialysisSearch(String searchText) async {
     var input = searchText.replaceAll(' ', '%');
     var response = await http.get(Uri.parse('https://maps.googleapis.com/maps/'
+        //+ 'api/place/queryautocomplete/json?key=$key&fields=place_id&input=dialysis%20near%20$input'));
+        //+ 'api/place/autocomplete/json?key=$key&input=$input%Dialysis&components=country:us'));
         + 'api/place/autocomplete/json?key=$key&input=$input'));
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
