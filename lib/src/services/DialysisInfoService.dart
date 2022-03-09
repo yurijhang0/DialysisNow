@@ -36,13 +36,15 @@ class DialysisInfoService {
   Future<List<DialysisIDDescription>> dialysisSearch(String searchText) async {
     var input = searchText.replaceAll(' ', '%');
     var response = await http.get(Uri.parse('https://maps.googleapis.com/maps/'
-        //+ 'api/place/queryautocomplete/json?key=$key&fields=place_id&input=dialysis%20near%20$input'));
-        //+ 'api/place/autocomplete/json?key=$key&input=$input%Dialysis&components=country:us'));
-        + 'api/place/autocomplete/json?key=$key&input=$input'));
+        //+ 'api/place/textsearch/json?key=$key&query=Dialysis%20center%20in%20$input'));
+        + 'api/place/textsearch/json?key=$key&query=Dialysis%20$input'));
+        //+ 'api/place/autocomplete/json?key=$key&input=Dialysis%Center%near$input&components=country:us'));
+        //+ 'api/place/autocomplete/json?key=$key&input=$input'));
+        //+ 'api/place/queryautocomplete/json?key=$key&fields=place_id&input=$input'));
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      var resultList = convert.jsonDecode(response.body)['predictions'] as List;
+      var resultList = convert.jsonDecode(response.body)['results'] as List;
       return resultList.map((placeID) =>
           DialysisIDDescription.fromJson(placeID)).toList();
     } else {

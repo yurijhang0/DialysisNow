@@ -82,7 +82,7 @@ class _MapScreenState extends State<MapScreen> {
                               itemBuilder: (context, index) {
                                 return ListTile(
                                   title: Text(
-                                      applicationBloc.dialysisSearchList[index].description,
+                                      applicationBloc.dialysisSearchList[index].name,
                                       style: TextStyle(color: Colors.blue)
                                   ),
                                   onTap: () { // select a result

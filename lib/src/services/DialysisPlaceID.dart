@@ -1,16 +1,17 @@
 class DialysisIDDescription {
   final String placeId;
-  final String description;
+  final String name;
 
   DialysisIDDescription({
     this.placeId,
-    this.description
+    this.name
   });
 
   factory DialysisIDDescription.fromJson(Map<String, dynamic> json) {
     return DialysisIDDescription(
       placeId: json['place_id'],
-      description: json['description']
+      name: json['name'],
+      //description: json['description']
     );
   }
 }
