@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:fryo/src/services/ApplicationBloc.dart';
 import 'package:fryo/src/services/DialysisInfo.dart';
+import 'package:fryo/src/services/MarkerService.dart';
 import 'package:fryo/src/shared/colors.dart';
 import 'package:fryo/src/shared/fryo_icons.dart';
 import 'package:fryo/src/shared/styles.dart';
@@ -31,6 +32,7 @@ class _MapScreenState extends State<MapScreen> {
         setMapLocation(location);
       }
     });
+    MarkerService.getMarker();
     super.initState();
   }
 
