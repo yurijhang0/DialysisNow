@@ -27,7 +27,7 @@ class _MapScreenState extends State<MapScreen> {
     centerSubscription =
         applicationBloc.selectedDialysisCenterStream.stream.listen((location) {
       if (location != null) {
-        // applicationBloc.setSelectedCenterMarker(buildContext);
+        //applicationBloc.setSelectedCenterMarker(buildContext);
         setMapLocation(location);
       }
     });

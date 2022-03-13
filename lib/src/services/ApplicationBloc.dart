@@ -47,6 +47,7 @@ class ApplicationBloc with ChangeNotifier {
 
   setSelectedCenterMarker(BuildContext buildContext) async {
     if (selectedDialysisCenter != null) {
+      markers.clear();
       markers.add(markerService.createCenterMarker(selectedDialysisCenter, buildContext));
     }
   }
