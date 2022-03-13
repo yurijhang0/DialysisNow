@@ -14,9 +14,7 @@ valuable time searching a multitude of centers to find treatment.
 
 ### Version 0.3.0
 #### New Features:
-* Implementation of bottom navigation bar so that a user is able to freely visit the report, information, and map screens respectively.
-
-* Refinement of map screen implementation with clearer map markers for improved usability. 
+* Completion of MongoDB database setup for report functionality.
 
 #### Bug Fixes
 * N/A
