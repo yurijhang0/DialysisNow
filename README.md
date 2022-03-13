@@ -10,19 +10,31 @@ users the capability to report closures of certain dialysis centers
 during times of crisis. This will allow other users to avoid wasting
 valuable time searching a multitude of centers to find treatment.
 
-## Release Notes for Version 0.2.0
+## Release Notes for Version 0.3.0
+
+### Version 0.3.0
+#### New Features:
+* Implementation of bottom navigation bar so that a user is able to freely visit the report, information, and map screens respectively.
+
+* Refinement of map screen implementation with clearer map markers for improved usability. 
+
+#### Bug Fixes
+* N/A
+
+#### Known Issues
+* MongoDB database and Flutter integration issue involving pub being unable to resolve dependency constraints due to varying package dependencies
+
+##
 
 ### Version 0.2.0
 #### New Features:
-* **Feature 1:** Map view to displayer dialysis center within a map screen.
+* Map view to displayer dialysis center within a map screen.
 
-* **Feature 2:** A user is able to search for dialysis care centers by name or address keywords which yields a list view of resulting dialysis care centers.
+* A user is able to search for dialysis care centers by name or address keywords which yields a list view of resulting dialysis care centers.
 
-* **Feature 3:** The map marker is first set to the user's location and then set to the chosen dialysis care center.
+* The map marker is first set to the user's location and then set to the chosen dialysis care center.
 
-* **Feature 4:** The map marker can be clicked for the info screen for the center's information.
-
-* **Feature 5:** Set up the MongoDB database for future reporting capabilities.
+* The map marker can be clicked for the info screen for the center's information.
 
 #### Bug Fixes
 * Crowding on map screen
@@ -34,13 +46,13 @@ valuable time searching a multitude of centers to find treatment.
 
 ### Version 0.1.0
 #### New Features:
-* **Feature 1:** Linked the Google Places API to the application to provide
+* Linked the Google Places API to the application to provide
   navigational services and features.
 
-* **Feature 2:** Has the capability to show information about a particular
+* Has the capability to show information about a particular
   dialysis center, such as their address and opening hours.
 
-* **Feature 3:** Linked the call functionality so that users are able to contact
+* Linked the call functionality so that users are able to contact
   their selected dialysis center.
 
 #### Bug Fixes
