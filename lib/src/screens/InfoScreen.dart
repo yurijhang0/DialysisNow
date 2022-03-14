@@ -26,7 +26,7 @@ class InfoScreen extends StatefulWidget {
 }
 
 class _InfoScreenState extends State<InfoScreen> {
-  int _selectedIndex = 1; // edit later when connecting the screens
+  int _selectedIndex = 0; // edit later when connecting the screens
   DialysisInfoService dialysisInfoService;
   final id = 'ChIJuc46ohEE9YgRyY2WKddJ4OY'; // place id EDIT FOR DEMO
 
@@ -59,36 +59,7 @@ class _InfoScreenState extends State<InfoScreen> {
                   title:
                   Text('DialysisNow', textAlign: TextAlign.center),
                 ),
-                body: [Text('Search Feature Currently Unavailable'),
-                  infoTab(context),
-                  Text('Resources Feature Currently Unavailable'),
-                ][_selectedIndex],
-                bottomNavigationBar: BottomNavigationBar(
-                  items: <BottomNavigationBarItem>[
-                    BottomNavigationBarItem(
-                        icon: Icon(Fryo.search),
-                        title: Text(
-                          'Search',
-                          style: tabLinkStyle,
-                        )),
-                    BottomNavigationBarItem(
-                        icon: Icon(Fryo.star),
-                        title: Text(
-                          'Main Center',
-                          style: tabLinkStyle,
-                        )),
-                    BottomNavigationBarItem(
-                        icon: Icon(Fryo.alarm),
-                        title: Text(
-                          'Resources',
-                          style: tabLinkStyle,
-                        )),
-                  ],
-                  currentIndex: _selectedIndex,
-                  type: BottomNavigationBarType.fixed,
-                  fixedColor: Colors.green[600],
-                  onTap: _onItemTapped,
-                ));
+                body: infoTab(context),);
             return Center(child: new Text('${snapshot
                 .data}')); // snapshot.data  :- get your object which is pass from your getDialysisCenterInfo() function
           }
@@ -158,7 +129,7 @@ class _InfoScreenState extends State<InfoScreen> {
                   launch("tel://" + formattedPhoneNum)
               ),
               headerCategoryItem('Maps', Fryo.map,
-                  onPressed: () => launch("https://www.google.com/maps/search/?api=1&query=" + snapshot2.data.name.replaceAll(" ", "+") + "&query_place_id=" + id)),
+                  onPressed: () => launch("https://www.google.com/maps/search/?api=1&query=" + snapshot2.data.name.replaceAll(" ", "+") + "&query_place_id=" + snapshot2.data.placeID)),
             ],
           ),
         )

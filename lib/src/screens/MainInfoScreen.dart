@@ -7,6 +7,7 @@ import 'package:fryo/src/shared/fryo_icons.dart';
 import 'package:fryo/src/shared/styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'MapScreen.dart';
 import 'ReportScreen.dart';
 
 class MainInfoScreen extends StatefulWidget {
@@ -46,54 +47,13 @@ class _MainInfoScreenState extends State<MainInfoScreen> {
           } else { // got API request -- create main info screen
             snapshot2 = snapshot;
             // log(snapshot2.data.imageURL);
-            return Scaffold(
-                backgroundColor: bgColor,
-                appBar: AppBar(
-                  centerTitle: true,
-                  elevation: 0,
-                  backgroundColor: primaryColor,
-                  title:
-                  Text('DialysisNow', textAlign: TextAlign.center),
-                ),
-                body: [Text('text'), mainInfoTab(context), Text('text')].elementAt(_selectedIndex),
-                bottomNavigationBar: BottomNavigationBar(
-                  items: <BottomNavigationBarItem>[
-                    BottomNavigationBarItem(
-                        icon: Icon(Fryo.search),
-                        title: Text(
-                          'Search',
-                          style: tabLinkStyle,
-                        )),
-                    BottomNavigationBarItem(
-                        icon: Icon(Fryo.star),
-                        title: Text(
-                          'Main Center',
-                          style: tabLinkStyle,
-                        )),
-                    BottomNavigationBarItem(
-                        icon: Icon(Fryo.alarm),
-                        title: Text(
-                          'Resources',
-                          style: tabLinkStyle,
-                        )),
-                  ],
-                  currentIndex: _selectedIndex,
-                  type: BottomNavigationBarType.fixed,
-                  fixedColor: Colors.green[600],
-                  onTap: _onItemTapped,
-                ));
+            return mainInfoTab(context);
             return Center(child: new Text('${snapshot
                 .data}')); // snapshot.data  :- get your object which is pass from your getDialysisCenterInfo() function
           }
         }
       },
     );
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 
   Widget mainInfoTab(BuildContext context) {
@@ -109,9 +69,9 @@ class _MainInfoScreenState extends State<MainInfoScreen> {
     ]);
   }
 
-  Widget mapTab(BuildContext context) {
-    map
-  }
+  // Widget mapTab(BuildContext context) {
+  //   map
+  // }
 
   Widget sectionHeader(String headerTitle, {onViewMore}) {
     return Row(
