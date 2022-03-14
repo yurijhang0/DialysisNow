@@ -14,10 +14,14 @@ valuable time searching a multitude of centers to find treatment.
 
 ### Version 0.3.0
 #### New Features:
-* Completion of MongoDB database setup for report functionality.
+* Implementation of a functional navigation bar so that users can easily access the different screens of the application.
+
+* Interactive map marker which allows for quicker accessibility of a dialysis center's information.
 
 #### Bug Fixes
-* N/A
+* Fixed map marker bug which repeatedly rendered old map markers, which can cause clutter on screen view
+
+* Fixed search and filtering when looking for particular dialysis centers
 
 #### Known Issues
 * MongoDB database and Flutter integration issue involving pub being unable to resolve dependency constraints due to varying package dependencies
