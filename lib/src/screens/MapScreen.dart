@@ -143,18 +143,6 @@ class _MapScreenState extends State<MapScreen> {
         )
     );
   }
-  Widget infoTab(BuildContext context) {  // bottom navigation bar ADD IN
-    return ListView(children: <Widget>[
-      // Image.network(
-      //   'https://maps.googleapis.com/' +
-      //       'maps/api/place/photo?maxwidth=400&photo_reference=' + snapshot2.data.imageRef +
-      //       '&key=AIzaSyBZZvJlR5JkiBo_5mSKYvBFoxFg2noE1VA', height: 150, fit: BoxFit.fitWidth,),
-      // mainInfo(),
-      // headerTopCategories(context),
-      // report(),
-      // medicalInfo(),
-    ]);
-  }
 
   void _onItemTapped(int index) {
     setState(() {

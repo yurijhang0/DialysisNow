@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fryo/src/services/DialysisInfo.dart';
@@ -10,23 +9,20 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'ReportScreen.dart';
 
-class InfoScreen extends StatefulWidget {
+class MainInfoScreen extends StatefulWidget {
   final String pageTitle;
   final bool closureBool;  // bool for closure status
-  final String placeID;
 
-  // set variables to store main center information
+  MainInfoScreen({Key key, this.pageTitle, this.closureBool}) : super(key: key);
 
-  InfoScreen({Key key, this.pageTitle, this.closureBool, this.placeID})
-      : super(key: key);
-  
   @override
-  _InfoScreenState createState() => _InfoScreenState();
+  _MainInfoScreenState createState() => _MainInfoScreenState();
 
 }
 
-class _InfoScreenState extends State<InfoScreen> {
-  int _selectedIndex = 1; // edit later when connecting the screens
+class _MainInfoScreenState extends State<MainInfoScreen> {
+
+  int _selectedIndex = 1;
   DialysisInfoService dialysisInfoService;
   final id = 'ChIJuc46ohEE9YgRyY2WKddJ4OY'; // place id EDIT FOR DEMO
 
@@ -37,7 +33,7 @@ class _InfoScreenState extends State<InfoScreen> {
   Widget build(BuildContext context) {
     dialysisInfoService = new DialysisInfoService();
     return FutureBuilder<DialysisInfo>(
-      future: dialysisInfoService.getDialysisCenterInfo(widget.placeID),
+      future: dialysisInfoService.getDialysisCenterInfo(id),
       builder: (BuildContext context,
           AsyncSnapshot<DialysisInfo> snapshot) { // AsyncSnapshot<DialysisInfo>
         if (snapshot.connectionState ==
@@ -59,10 +55,7 @@ class _InfoScreenState extends State<InfoScreen> {
                   title:
                   Text('DialysisNow', textAlign: TextAlign.center),
                 ),
-                body: [Text('Search Feature Currently Unavailable'),
-                  infoTab(context),
-                  Text('Resources Feature Currently Unavailable'),
-                ][_selectedIndex],
+                body: [Text('text'), mainInfoTab(context), Text('text')].elementAt(_selectedIndex),
                 bottomNavigationBar: BottomNavigationBar(
                   items: <BottomNavigationBarItem>[
                     BottomNavigationBarItem(
@@ -103,7 +96,7 @@ class _InfoScreenState extends State<InfoScreen> {
     });
   }
 
-  Widget infoTab(BuildContext context) {
+  Widget mainInfoTab(BuildContext context) {
     return ListView(children: <Widget>[
       Image.network(
         'https://maps.googleapis.com/' +
@@ -114,6 +107,10 @@ class _InfoScreenState extends State<InfoScreen> {
       report(),
       medicalInfo(),
     ]);
+  }
+
+  Widget mapTab(BuildContext context) {
+    map
   }
 
   Widget sectionHeader(String headerTitle, {onViewMore}) {
@@ -359,5 +356,3 @@ class _InfoScreenState extends State<InfoScreen> {
   }
 
 }
-
-

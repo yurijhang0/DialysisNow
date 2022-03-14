@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:fryo/src/screens/MainInfoScreen.dart';
 import 'package:fryo/src/screens/MapScreen.dart';
 import 'package:fryo/src/screens/InfoScreen.dart';
 import 'package:fryo/src/services/ApplicationBloc.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.green,
           ),
-          home: MapScreen()//, // just for testing
+          home: MainInfoScreen()//, // just for testing
         // routes: <String, WidgetBuilder> {
         //   '/signup': (BuildContext context) =>  SignUpPage(),
         //   '/signin': (BuildContext context) =>  SignInPage(),
