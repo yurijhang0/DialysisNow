@@ -10,7 +10,19 @@ users the capability to report closures of certain dialysis centers
 during times of crisis. This will allow other users to avoid wasting
 valuable time searching a multitude of centers to find treatment.
 
-## Release Notes for Version 0.3.0
+## Release Notes for Version 0.4.0
+
+### Version 0.4.0
+#### New Features:
+* Implementation of a functional favorites menu so that users can easily mark their preferred dialysis centers, as well as reference them again with ease.
+
+#### Bug Fixes
+* N/A
+
+#### Known Issues
+* Currently experiencing ongoing issues with integration between the MongoDB database and Flutter integration due to previously noted issues. This has been worked on extensively during previous sprints, with no known solutions. As a result, will consider pivoting to a different database to be used for the report functionality. This pivot will likely be to Firebase. 
+
+##
 
 ### Version 0.3.0
 #### New Features:
