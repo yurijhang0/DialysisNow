@@ -15,6 +15,7 @@ import 'package:fryo/src/shared/colors.dart';
 import 'package:fryo/src/shared/fryo_icons.dart';
 import 'package:fryo/src/shared/styles.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:fryo/src/shared/globals.dart' as globals;
 
 void main() => runApp(MyApp());
 
@@ -50,13 +51,7 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   final mainInfo = new MainInfoScreen();
   int _selectedIndex = 1;
-  static List<Widget> _widgetOptions = <Widget>[
-    MapScreen(),
-    MainInfoScreen(),
-    Text(
-      'Information',
-    ),
-  ];
+  static List<Widget> _widgetOptions = globals.widgetOptions;
 
   void _onItemTapped(int index) {
     setState(() {

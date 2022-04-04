@@ -3,10 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fryo/src/services/DialysisInfo.dart';
 import 'package:fryo/src/services/DialysisInfoService.dart';
+import 'package:fryo/src/screens/MainInfoScreen.dart';
 import 'package:fryo/src/shared/colors.dart';
 import 'package:fryo/src/shared/fryo_icons.dart';
 import 'package:fryo/src/shared/styles.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:fryo/src/shared/globals.dart' as globals;
+import 'package:fryo/main.dart' as main;
 
 import 'ReportScreen.dart';
 
@@ -28,7 +31,7 @@ class InfoScreen extends StatefulWidget {
 class _InfoScreenState extends State<InfoScreen> {
   int _selectedIndex = 0; // edit later when connecting the screens
   DialysisInfoService dialysisInfoService;
-  final id = 'ChIJuc46ohEE9YgRyY2WKddJ4OY'; // place id EDIT FOR DEMO
+  //final id = 'ChIJuc46ohEE9YgRyY2WKddJ4OY'; // place id EDIT FOR DEMO
 
   // get request fields
   AsyncSnapshot<DialysisInfo> snapshot2;
@@ -124,6 +127,10 @@ class _InfoScreenState extends State<InfoScreen> {
               headerCategoryItem('Report', Fryo.pencil, onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => ReportScreen()));
+              }),
+              headerCategoryItem('Mark as Main', Fryo.heart, onPressed: () => {
+                  globals.mainID = widget.placeID,
+                  globals.widgetOptions[1] = MainInfoScreen(placeID: globals.mainID),
               }),
               headerCategoryItem('Call', Fryo.phone, onPressed: () =>
                   launch("tel://" + formattedPhoneNum)

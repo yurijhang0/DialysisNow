@@ -25,7 +25,7 @@ class MarkerService {
   static void getMarker() async {
     markerIcon = await getBytesFromAsset(
         path: 'images/click.bmp', //paste the custom image path
-        width: 300 // size of custom image as marker
+        width: 500 // size of custom image as marker
     );
   }
 

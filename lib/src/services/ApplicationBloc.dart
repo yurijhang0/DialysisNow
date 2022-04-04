@@ -17,6 +17,7 @@ class ApplicationBloc with ChangeNotifier {
   Position currLocation;
   List<DialysisIDDescription> dialysisSearchList;
   StreamController<DialysisInfo> selectedDialysisCenterStream = StreamController<DialysisInfo>();
+  String mainId;
 
   ApplicationBloc() {
     setCurrLocation();
