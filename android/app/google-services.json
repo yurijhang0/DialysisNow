@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "913657507795",
+    "firebase_url": "https://dialysisnow-32ecf-default-rtdb.firebaseio.com",
+    "project_id": "dialysisnow-32ecf",
+    "storage_bucket": "dialysisnow-32ecf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:913657507795:android:e47c969ecfc6aa3ce80926",
+        "android_client_info": {
+          "package_name": "com.DialysisNow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "913657507795-o9pohi945ifcsimnv2hf8jsf2ms23v05.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZx8FU_snN3fH7eIXQAYVIidID3fT0Mjs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "913657507795-o9pohi945ifcsimnv2hf8jsf2ms23v05.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
