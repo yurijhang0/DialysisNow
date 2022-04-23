@@ -50,12 +50,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBEypy7C7oIVnWM5y9GOr_gYui-lOCI3Ek',
-    appId: '1:913657507795:ios:07d422eeacb8b2c4e80926',
+    appId: '1:913657507795:ios:2cb0386d10dbb322e80926',
     messagingSenderId: '913657507795',
     projectId: 'dialysisnow-32ecf',
     databaseURL: 'https://dialysisnow-32ecf-default-rtdb.firebaseio.com',
     storageBucket: 'dialysisnow-32ecf.appspot.com',
-    iosClientId: '913657507795-u1nqsolp8cok0j851bivpb6t18sd26mk.apps.googleusercontent.com',
-    iosBundleId: 'com.Dialysi',
+    iosClientId: '913657507795-7ibkn1coktlk9rq4iimi1tcsosev8ek1.apps.googleusercontent.com',
+    iosBundleId: 'com.DialysisNow',
   );
 }
