@@ -12,7 +12,7 @@ HTTP Get requests for dialysis center information and for GoogleMaps.
  */
 class DialysisInfoService {
 
-  static final key = 'AIzaSyBZZvJlR5JkiBo_5mSKYvBFoxFg2noE1VA';
+  static final key = 'AIzaSyBgKQvmYT0H1PfL3oLHNl2Ge58TFyxZESk';
 
   // get selected dialysis center information for info screen
   Future<DialysisInfo> getDialysisCenterInfo(String id) async {
@@ -24,10 +24,13 @@ class DialysisInfoService {
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
+      log("HI");
+      log(response.body);
       return DialysisInfo.fromJson(jsonDecode(response.body));
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
+      log("BYE");
       throw Exception('Failed to load dialysis center info.');
     }
   }

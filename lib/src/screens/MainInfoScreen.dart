@@ -73,7 +73,7 @@ class _MainInfoScreenState extends State<MainInfoScreen> {
       Image.network(
         'https://maps.googleapis.com/' +
             'maps/api/place/photo?maxwidth=400&photo_reference=' + snapshot2.data.imageRef +
-            '&key=AIzaSyBZZvJlR5JkiBo_5mSKYvBFoxFg2noE1VA', height: 150, fit: BoxFit.fitWidth,),
+            '&key=AIzaSyBgKQvmYT0H1PfL3oLHNl2Ge58TFyxZESk', height: 150, fit: BoxFit.fitWidth,),
       mainInfo(),
       headerTopCategories(context),
       report(),
