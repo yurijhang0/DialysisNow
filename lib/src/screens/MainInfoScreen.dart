@@ -1,43 +1,49 @@
-import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fryo/src/services/DialysisInfo.dart';
 import 'package:fryo/src/services/DialysisInfoService.dart';
-import 'package:fryo/src/screens/MainInfoScreen.dart';
 import 'package:fryo/src/shared/colors.dart';
 import 'package:fryo/src/shared/fryo_icons.dart';
 import 'package:fryo/src/shared/styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fryo/src/shared/globals.dart' as globals;
-import 'package:fryo/main.dart' as main;
 
+import 'MapScreen.dart';
 import 'ReportScreen.dart';
 
-class InfoScreen extends StatefulWidget {
+class MainInfoScreen extends StatefulWidget {
   final String pageTitle;
   final bool closureBool;  // bool for closure status
   final String placeID;
 
-  // set variables to store main center information
+  MainInfoScreen({Key key, this.pageTitle, this.closureBool, this.placeID}) : super(key: key);
 
-  InfoScreen({Key key, this.pageTitle, this.closureBool, this.placeID})
-      : super(key: key);
-  
   @override
-  _InfoScreenState createState() => _InfoScreenState();
+  _MainInfoScreenState createState() => _MainInfoScreenState();
 
 }
 
-class _InfoScreenState extends State<InfoScreen> {
-  int _selectedIndex = 0; // edit later when connecting the screens
+class _MainInfoScreenState extends State<MainInfoScreen> {
+
+  int _selectedIndex = 1;
   DialysisInfoService dialysisInfoService;
-  //final id = 'ChIJuc46ohEE9YgRyY2WKddJ4OY'; // place id EDIT FOR DEMO
+  final id = globals.mainID; // place id EDIT FOR DEMO
 
   // get request fields
   AsyncSnapshot<DialysisInfo> snapshot2;
 
   @override
   Widget build(BuildContext context) {
+    if (widget.placeID == "") {
+      return Column(children: <Widget>[
+          Icon(Fryo.search, color: Colors.green, size: 50),
+          SizedBox(height: 20),
+          Text("                              Search for Main Center"),
+    ],
+        mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,);
+    }
     dialysisInfoService = new DialysisInfoService();
     return FutureBuilder<DialysisInfo>(
       future: dialysisInfoService.getDialysisCenterInfo(widget.placeID),
@@ -53,16 +59,7 @@ class _InfoScreenState extends State<InfoScreen> {
           } else { // got API request -- create main info screen
             snapshot2 = snapshot;
             // log(snapshot2.data.imageURL);
-            return Scaffold(
-                backgroundColor: bgColor,
-                appBar: AppBar(
-                  centerTitle: true,
-                  elevation: 0,
-                  backgroundColor: primaryColor,
-                  title:
-                  Text('DialysisNow', textAlign: TextAlign.center),
-                ),
-                body: infoTab(context),);
+            return mainInfoTab(context);
             return Center(child: new Text('${snapshot
                 .data}')); // snapshot.data  :- get your object which is pass from your getDialysisCenterInfo() function
           }
@@ -71,13 +68,7 @@ class _InfoScreenState extends State<InfoScreen> {
     );
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  Widget infoTab(BuildContext context) {
+  Widget mainInfoTab(BuildContext context) {
     return ListView(children: <Widget>[
       Image.network(
         'https://maps.googleapis.com/' +
@@ -89,6 +80,10 @@ class _InfoScreenState extends State<InfoScreen> {
       medicalInfo(),
     ]);
   }
+
+  // Widget mapTab(BuildContext context) {
+  //   map
+  // }
 
   Widget sectionHeader(String headerTitle, {onViewMore}) {
     return Row(
@@ -128,15 +123,17 @@ class _InfoScreenState extends State<InfoScreen> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => ReportScreen()));
               }),
-              headerCategoryItem('Mark as Main', Fryo.heart, onPressed: () => {
-                  globals.mainID = widget.placeID,
-                  globals.widgetOptions[1] = MainInfoScreen(placeID: globals.mainID),
-              }),
+              headerCategoryItem('Remove from Main', Fryo.heart, onPressed: () =>
+              {
+                globals.mainID = "",
+                globals.widgetOptions[1] =
+                    MainInfoScreen(placeID: globals.mainID),
+              }, c: Colors.pink),
               headerCategoryItem('Call', Fryo.phone, onPressed: () =>
                   launch("tel://" + formattedPhoneNum)
               ),
               headerCategoryItem('Maps', Fryo.map,
-                  onPressed: () => launch("https://www.google.com/maps/search/?api=1&query=" + snapshot2.data.name.replaceAll(" ", "+") + "&query_place_id=" + snapshot2.data.placeID)),
+                  onPressed: () => launch("https://www.google.com/maps/search/?api=1&query=" + snapshot2.data.name.replaceAll(" ", "+") + "&query_place_id=" + id)),
             ],
           ),
         )
@@ -144,7 +141,7 @@ class _InfoScreenState extends State<InfoScreen> {
     );
   }
 
-  Widget headerCategoryItem(String name, IconData icon, {onPressed}) {
+  Widget headerCategoryItem(String name, IconData icon, {onPressed, Color c = Colors.black87}) {
     return Container(
       margin: EdgeInsets.only(left: 15),
       child: Column(
@@ -160,7 +157,7 @@ class _InfoScreenState extends State<InfoScreen> {
                 heroTag: name,
                 onPressed: onPressed,
                 backgroundColor: Colors.green[100],
-                child: Icon(icon, size: 35, color: Colors.black87),
+                child: Icon(icon, size: 35, color: c),
               )),
           Text(name + ' ›', style: TextStyle(
               fontWeight: FontWeight.bold, fontSize: 20))
@@ -337,5 +334,3 @@ class _InfoScreenState extends State<InfoScreen> {
   }
 
 }
-
-
