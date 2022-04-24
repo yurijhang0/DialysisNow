@@ -805,7 +805,6 @@ SPEC CHECKSUMS:
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   geolocator_apple: cc556e6844d508c95df1e87e3ea6fa4e58c50401
   google_maps_flutter: c59fc576c0d0c7f4dc4bd63832c862d22d5a7c6d
-  GoogleMaps: 008e2c80e38605b56b560e8deb73d4194ff30bef
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleMaps: 94e6e0851beece6678af9f508f4918b7a7c61722
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
