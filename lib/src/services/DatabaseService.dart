@@ -8,8 +8,9 @@ class DatabaseService {
   // collection reference
   final CollectionReference reportCollection = FirebaseFirestore.instance.collection('reports');
 
-  Future updateUserData(bool powerOutage, bool hurricane, bool waterContamination, bool internal, bool other, String addInfo) async {
+  Future updateUserData(String placeID, bool powerOutage, bool hurricane, bool waterContamination, bool internal, bool other, String addInfo) async {
     return await reportCollection.doc().set({
+      'placeID': placeID,
       'powerOutage': powerOutage,
       'hurricane': hurricane,
       'waterContamination': waterContamination,

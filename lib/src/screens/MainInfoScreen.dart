@@ -121,7 +121,7 @@ class _MainInfoScreenState extends State<MainInfoScreen> {
             children: <Widget>[
               headerCategoryItem('Report', Fryo.pencil, onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ReportScreen()));
+                    MaterialPageRoute(builder: (context) => ReportScreen(placeID: widget.placeID)));
               }),
               headerCategoryItem('Remove from Main', Fryo.heart, onPressed: () =>
               {
