@@ -1,13 +1,16 @@
 
+import 'dart:math';
+
 class Report {
 
-  final bool powerOutage;
-  final bool hurricane;
-  final bool waterContamination;
-  final bool internal;
-  final bool other;
-  final String addInfo;
+  String placeID;
+  bool powerOutage;
+  bool hurricane;
+  bool waterContamination;
+  bool internal;
+  bool other;
+  String addInfo;
 
-  Report({this.powerOutage, this.hurricane, this.waterContamination, this.internal, this.other, this.addInfo});
+  Report({this.placeID, this.powerOutage, this.hurricane, this.waterContamination, this.internal, this.other, this.addInfo});
 
 }

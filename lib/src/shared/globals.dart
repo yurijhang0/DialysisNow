@@ -10,3 +10,4 @@ List<Widget> widgetOptions = <Widget>[
   MainInfoScreen(placeID: mainID),
   Resources(),
 ];
+List<Map<String, dynamic>> reportList = [];

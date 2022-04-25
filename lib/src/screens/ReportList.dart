@@ -30,7 +30,7 @@ class _ReportListState extends State<ReportList> {
     return ListView.builder(
         itemCount: reports.length,
         itemBuilder: (context, index) {
-          return
+          return null;
         },
     );
   }

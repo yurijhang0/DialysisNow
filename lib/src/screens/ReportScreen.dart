@@ -12,9 +12,10 @@ import 'package:fryo/src/screens/ReportList.dart';
 class ReportScreen extends StatefulWidget {
   final String pageTitle;
   final String placeID;
+  final DatabaseService dataService;
 
 
-  ReportScreen({Key key, this.pageTitle, this.placeID}) : super(key: key);
+  ReportScreen({Key key, this.pageTitle, this.placeID, this.dataService}) : super(key: key);
 
   @override
   _ReportScreenState createState() => _ReportScreenState();
@@ -307,10 +308,9 @@ class _ReportScreenState extends State<ReportScreen> {
                     if (powerOutageBool || hurricaneBool || waterContaminationBool ||internalBool || otherBool || additionalInfo.data != "") {
                       closureBool = true;
                     }
+                    await DatabaseService().updateUserData(widget.placeID, powerOutageBool, hurricaneBool, waterContaminationBool, internalBool, otherBool, additionalInfo.data);
                     Navigator.pop(context);
-                    return await DatabaseService().updateUserData(widget.placeID, powerOutageBool, hurricaneBool, waterContaminationBool, internalBool, otherBool, additionalInfo.data);
-                    //Navigator.push(context, MaterialPageRoute(builder: (context) => InfoScreen(closureBool: closureBool)));
-                    Navigator.pop(context);
+                    //globawidget.dataService.getList();
                   },
                   child:
                   const Text(

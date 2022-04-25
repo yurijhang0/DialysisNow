@@ -5,6 +5,7 @@ import 'package:fryo/src/screens/MainInfoScreen.dart';
 import 'package:fryo/src/screens/MapScreen.dart';
 import 'package:fryo/src/screens/InfoScreen.dart';
 import 'package:fryo/src/services/ApplicationBloc.dart';
+import 'package:fryo/src/services/DatabaseService.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -36,6 +37,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    DatabaseService().getList();
     return ChangeNotifierProvider(
       create: (context) => ApplicationBloc(),
       child: MaterialApp(
