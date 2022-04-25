@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fryo/src/services/DialysisInfo.dart';
@@ -31,6 +33,8 @@ class _MainInfoScreenState extends State<MainInfoScreen> {
 
   // get request fields
   AsyncSnapshot<DialysisInfo> snapshot2;
+  bool isFill = false;
+  Map<String, dynamic> areport;
 
   @override
   Widget build(BuildContext context) {
@@ -69,14 +73,21 @@ class _MainInfoScreenState extends State<MainInfoScreen> {
   }
 
   Widget mainInfoTab(BuildContext context) {
+    List<Map<String, dynamic>> rList = globals.reportList;
+    rList.forEach((element) => {
+      if (element["placeID"] == id) {
+        isFill = true,
+        areport = element
+      }
+    });
     return ListView(children: <Widget>[
       Image.network(
         'https://maps.googleapis.com/' +
             'maps/api/place/photo?maxwidth=400&photo_reference=' + snapshot2.data.imageRef +
-            '&key=AIzaSyBZZvJlR5JkiBo_5mSKYvBFoxFg2noE1VA', height: 150, fit: BoxFit.fitWidth,),
+            '&key=AIzaSyBgKQvmYT0H1PfL3oLHNl2Ge58TFyxZESk', height: 150, fit: BoxFit.fitWidth,),
       mainInfo(),
       headerTopCategories(context),
-      report(),
+      isFill ? report() : Text(""),
       medicalInfo(),
     ]);
   }
@@ -121,7 +132,7 @@ class _MainInfoScreenState extends State<MainInfoScreen> {
             children: <Widget>[
               headerCategoryItem('Report', Fryo.pencil, onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ReportScreen()));
+                    MaterialPageRoute(builder: (context) => ReportScreen(placeID: id))).then(onGoBack);
               }),
               headerCategoryItem('Remove from Main', Fryo.heart, onPressed: () =>
               {
@@ -139,6 +150,11 @@ class _MainInfoScreenState extends State<MainInfoScreen> {
         )
       ],
     );
+  }
+
+  FutureOr onGoBack(dynamic value) {
+    setState(() {
+    });
   }
 
   Widget headerCategoryItem(String name, IconData icon, {onPressed, Color c = Colors.black87}) {
@@ -301,7 +317,7 @@ class _MainInfoScreenState extends State<MainInfoScreen> {
 
   Widget report() {
     bool currClosureBool = widget.closureBool ?? false;
-    if (currClosureBool) {
+    if (true) {
       return Container(
         padding: new EdgeInsets.all(20.0),
         child: Container(
@@ -318,7 +334,31 @@ class _MainInfoScreenState extends State<MainInfoScreen> {
                   new Text("ACCORDING TO USER REPORTS",
                     // FIX THIS LATER TO INCLUDE REASON
                     style: TextStyle(color: Colors.white, fontSize: 20),
-                    textAlign: TextAlign.center,)
+                    textAlign: TextAlign.center,),
+                  new Text("Reason(s):",
+                    // FIX THIS LATER TO INCLUDE REASON
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    textAlign: TextAlign.center,),
+                  areport["powerOutage"] == true ? new Text("- Power Outage",
+                    // FIX THIS LATER TO INCLUDE REASON
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    textAlign: TextAlign.center,) : new Container(),
+                  areport["hurricane"] == true ? new Text("- Hurricane",
+                    // FIX THIS LATER TO INCLUDE REASON
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    textAlign: TextAlign.center,) : new Container(),
+                  areport["waterContamination"] == true ? new Text("- Water Contamination",
+                    // FIX THIS LATER TO INCLUDE REASON
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    textAlign: TextAlign.center,) : new Container(),
+                  areport["internal"] == true ? new Text("- Internal",
+                    // FIX THIS LATER TO INCLUDE REASON
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    textAlign: TextAlign.center,) : new Container(),
+                  areport["addInfo"] != "" ? new Text("Additional Info: " + areport["addInfo"],
+                    // FIX THIS LATER TO INCLUDE REASON
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    textAlign: TextAlign.center,) : new Container(),
                 ])),
       );
     } else {

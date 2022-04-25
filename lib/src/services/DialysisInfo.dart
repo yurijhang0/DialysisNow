@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 /*
 Format dialysis information from http get request.
  */

@@ -1,11 +1,21 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fryo/src/models/MyUser.dart';
 import 'package:fryo/src/screens/InfoScreen.dart';
+import '../models/report.dart';
+import '../services/DatabaseService.dart';
 import '../shared/colors.dart';
+import 'package:fryo/src/services/DatabaseService.dart';
+import 'package:provider/provider.dart';
+import 'package:fryo/src/screens/ReportList.dart';
 
 class ReportScreen extends StatefulWidget {
   final String pageTitle;
+  final String placeID;
+  final DatabaseService dataService;
 
-  ReportScreen({Key key, this.pageTitle}) : super(key: key);
+
+  ReportScreen({Key key, this.pageTitle, this.placeID, this.dataService}) : super(key: key);
 
   @override
   _ReportScreenState createState() => _ReportScreenState();
@@ -23,6 +33,9 @@ class _ReportScreenState extends State<ReportScreen> {
   var otherBool = false;
   var additionalInfo = Text("");
 
+  get email => null;
+  get password => null;
+
   @override
   void dispose() {
     // clean controller when widget disposed
@@ -32,15 +45,18 @@ class _ReportScreenState extends State<ReportScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: bgColor,
-        appBar: _topBar(),
-        body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              _report(),
-            ]));
+    return StreamProvider<List<Report>>.value(
+      value: DatabaseService().reports,
+      child: Scaffold(
+          backgroundColor: bgColor,
+          appBar: _topBar(),
+          body: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                _report(),
+              ])),
+    );
   }
 
 //AppBar
@@ -55,6 +71,17 @@ class _ReportScreenState extends State<ReportScreen> {
   }
 
   Widget _report() {
+
+    final FirebaseAuth auth = FirebaseAuth.instance;
+
+    MyUser userFromFirebaseUser(User user) {
+      if (user != null) {
+        return MyUser(uid: user.uid);
+      } else {
+        return null;
+      }
+    }
+
     return Container(
         padding: const EdgeInsets.all(10.0),
         child: Column(
@@ -80,10 +107,14 @@ class _ReportScreenState extends State<ReportScreen> {
                   child: FittedBox(
                     child: FloatingActionButton(
                       shape: CircleBorder(),
-                      backgroundColor: Colors.green[100],
+                      backgroundColor: powerOutageBool ? Colors.green[300] : Colors.green[100],
                       child: Icon(Icons.power_off_outlined, color: Colors.black87),
-                      onPressed: (){
-                        powerOutageBool = true;
+                      onPressed: () {
+                        setState(() => powerOutageBool = !powerOutageBool);
+                        //powerOutageBool = true;
+                        //UserCredential result = await auth.createUserWithEmailAndPassword(email: email, password: password);
+                        //User user = result.user;
+                        //return userFromFirebaseUser(user);
                       },
                     ),
                   )
@@ -94,10 +125,10 @@ class _ReportScreenState extends State<ReportScreen> {
                     child: FittedBox(
                       child: FloatingActionButton(
                         shape: CircleBorder(),
-                        backgroundColor: Colors.green[100],
+                        backgroundColor: hurricaneBool ? Colors.green[300] : Colors.green[100],
                         child: Icon(Icons.storm, color: Colors.black87),
                         onPressed: (){
-                          hurricaneBool = true;
+                          setState(() => hurricaneBool = !hurricaneBool);
                         },
                       ),
                     )
@@ -108,10 +139,10 @@ class _ReportScreenState extends State<ReportScreen> {
                     child: FittedBox(
                       child: FloatingActionButton(
                         shape: CircleBorder(),
-                        backgroundColor: Colors.green[100],
+                        backgroundColor: waterContaminationBool ? Colors.green[300] : Colors.green[100],
                         child: Icon(Icons.water_damage_outlined, color: Colors.black87),
                         onPressed: (){
-                          waterContaminationBool = true;
+                          setState(() => waterContaminationBool = !waterContaminationBool);
                         },
                       ),
                     )
@@ -180,10 +211,10 @@ class _ReportScreenState extends State<ReportScreen> {
                     child: FittedBox(
                       child: FloatingActionButton(
                         shape: CircleBorder(),
-                        backgroundColor: Colors.green[100],
+                        backgroundColor: internalBool ? Colors.green[300] : Colors.green[100],
                         child: Icon(Icons.warning_amber_outlined, color: Colors.black87),
                         onPressed: (){
-                          internalBool = true;
+                          setState(() => internalBool = !internalBool);
                         },
                       ),
                     )
@@ -194,10 +225,10 @@ class _ReportScreenState extends State<ReportScreen> {
                     child: FittedBox(
                       child: FloatingActionButton(
                         shape: CircleBorder(),
-                        backgroundColor: Colors.green[100],
+                        backgroundColor: otherBool ? Colors.green[300] : Colors.green[100],
                         child: Icon(Icons.note_outlined, color: Colors.black87),
                         onPressed: (){
-                          otherBool = true;
+                          setState(() => otherBool = !otherBool);
                         },
                       ),
                     )
@@ -270,14 +301,16 @@ class _ReportScreenState extends State<ReportScreen> {
                   style: TextButton.styleFrom(backgroundColor: Colors.red),
                 ),
                 TextButton(
-                  onPressed: (){
+                  onPressed: () async {
                     additionalInfo = Text(textController.text);
                     // TEMPORARY CLOSURE REPORT!! WILL USE DATABASE LATER
                     bool closureBool = false;
                     if (powerOutageBool || hurricaneBool || waterContaminationBool ||internalBool || otherBool || additionalInfo.data != "") {
                       closureBool = true;
                     }
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => InfoScreen(closureBool: closureBool)));
+                    await DatabaseService().updateUserData(widget.placeID, powerOutageBool, hurricaneBool, waterContaminationBool, internalBool, otherBool, additionalInfo.data);
+                    Navigator.pop(context);
+                    //globawidget.dataService.getList();
                   },
                   child:
                   const Text(

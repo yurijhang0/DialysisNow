@@ -1,4 +1,7 @@
+import 'dart:async';
+import 'dart:collection';
 import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fryo/src/services/DialysisInfo.dart';
@@ -7,10 +10,13 @@ import 'package:fryo/src/screens/MainInfoScreen.dart';
 import 'package:fryo/src/shared/colors.dart';
 import 'package:fryo/src/shared/fryo_icons.dart';
 import 'package:fryo/src/shared/styles.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fryo/src/shared/globals.dart' as globals;
 import 'package:fryo/main.dart' as main;
 
+import '../models/report.dart';
+import '../services/DatabaseService.dart';
 import 'ReportScreen.dart';
 
 class InfoScreen extends StatefulWidget {
@@ -35,40 +41,49 @@ class _InfoScreenState extends State<InfoScreen> {
 
   // get request fields
   AsyncSnapshot<DialysisInfo> snapshot2;
+  StreamSubscription centerSubscription;
+  DatabaseService databaseService = DatabaseService();
+  bool isFill = false;
+  Map<String, dynamic> areport;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     dialysisInfoService = new DialysisInfoService();
     return FutureBuilder<DialysisInfo>(
-      future: dialysisInfoService.getDialysisCenterInfo(widget.placeID),
-      builder: (BuildContext context,
-          AsyncSnapshot<DialysisInfo> snapshot) { // AsyncSnapshot<DialysisInfo>
-        if (snapshot.connectionState ==
-            ConnectionState.waiting) { // loading state -- create load screen
-          return Center(child: Text('Please wait its loading...'));
-        } else {
-          if (snapshot
-              .hasError) { // failure for API request -- create error screen
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else { // got API request -- create main info screen
-            snapshot2 = snapshot;
-            // log(snapshot2.data.imageURL);
-            return Scaffold(
-                backgroundColor: bgColor,
-                appBar: AppBar(
-                  centerTitle: true,
-                  elevation: 0,
-                  backgroundColor: primaryColor,
-                  title:
-                  Text('DialysisNow', textAlign: TextAlign.center),
-                ),
-                body: infoTab(context),);
-            return Center(child: new Text('${snapshot
-                .data}')); // snapshot.data  :- get your object which is pass from your getDialysisCenterInfo() function
+        future: dialysisInfoService.getDialysisCenterInfo(widget.placeID),
+        builder: (BuildContext context,
+            AsyncSnapshot<DialysisInfo> snapshot) { // AsyncSnapshot<DialysisInfo>
+          if (snapshot.connectionState ==
+              ConnectionState.waiting) { // loading state -- create load screen
+            return Center(child: Text('Please wait its loading...'));
+          } else {
+            if (snapshot
+                .hasError) { // failure for API request -- create error screen
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else { // got API request -- create main info screen
+              snapshot2 = snapshot;
+              // log(snapshot2.data.imageURL);
+              return Scaffold(
+                  backgroundColor: bgColor,
+                  appBar: AppBar(
+                    centerTitle: true,
+                    elevation: 0,
+                    backgroundColor: primaryColor,
+                    title:
+                    Text('DialysisNow', textAlign: TextAlign.center),
+                  ),
+                  body: infoTab(context),);
+              return Center(child: new Text('${snapshot
+                  .data}')); // snapshot.data  :- get your object which is pass from your getDialysisCenterInfo() function
+            }
           }
-        }
-      },
-    );
+        },
+      );
   }
 
   void _onItemTapped(int index) {
@@ -77,18 +92,27 @@ class _InfoScreenState extends State<InfoScreen> {
     });
   }
 
+
   Widget infoTab(BuildContext context) {
+    List<Map<String, dynamic>> rList = globals.reportList;
+    rList.forEach((element) => {
+      if (element["placeID"] == widget.placeID) {
+        isFill = true,
+        areport = element
+      }
+    });
     return ListView(children: <Widget>[
       Image.network(
         'https://maps.googleapis.com/' +
             'maps/api/place/photo?maxwidth=400&photo_reference=' + snapshot2.data.imageRef +
-            '&key=AIzaSyBZZvJlR5JkiBo_5mSKYvBFoxFg2noE1VA', height: 150, fit: BoxFit.fitWidth,),
+            '&key=AIzaSyBgKQvmYT0H1PfL3oLHNl2Ge58TFyxZESk', height: 150, fit: BoxFit.fitWidth,),
       mainInfo(),
       headerTopCategories(context),
-      report(),
+      isFill ? report() : Text(""),
       medicalInfo(),
     ]);
   }
+
 
   Widget sectionHeader(String headerTitle, {onViewMore}) {
     return Row(
@@ -126,7 +150,10 @@ class _InfoScreenState extends State<InfoScreen> {
             children: <Widget>[
               headerCategoryItem('Report', Fryo.pencil, onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ReportScreen()));
+                    MaterialPageRoute(builder: (context) => ReportScreen(placeID: widget.placeID, dataService: databaseService))).then(onGoBack);
+                setState(() {
+                  isFill = globals.reportList.isNotEmpty;
+                });
               }),
               headerCategoryItem('Mark as Main', Fryo.heart, onPressed: () => {
                   globals.mainID = widget.placeID,
@@ -144,6 +171,10 @@ class _InfoScreenState extends State<InfoScreen> {
     );
   }
 
+  FutureOr onGoBack(dynamic value) {
+    setState(() {
+    });
+  }
   Widget headerCategoryItem(String name, IconData icon, {onPressed}) {
     return Container(
       margin: EdgeInsets.only(left: 15),
@@ -303,8 +334,9 @@ class _InfoScreenState extends State<InfoScreen> {
   }
 
   Widget report() {
+    //log(DatabaseService().reportList.toString());
     bool currClosureBool = widget.closureBool ?? false;
-    if (currClosureBool) {
+    if (true) {
       return Container(
         padding: new EdgeInsets.all(20.0),
         child: Container(
@@ -321,7 +353,31 @@ class _InfoScreenState extends State<InfoScreen> {
                   new Text("ACCORDING TO USER REPORTS",
                     // FIX THIS LATER TO INCLUDE REASON
                     style: TextStyle(color: Colors.white, fontSize: 20),
-                    textAlign: TextAlign.center,)
+                    textAlign: TextAlign.center,),
+                  new Text("Reason(s):",
+                    // FIX THIS LATER TO INCLUDE REASON
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    textAlign: TextAlign.center,),
+                  areport["powerOutage"] == true ? new Text("- Power Outage",
+                    // FIX THIS LATER TO INCLUDE REASON
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    textAlign: TextAlign.center,) : new Container(),
+                  areport["hurricane"] == true ? new Text("- Hurricane",
+                    // FIX THIS LATER TO INCLUDE REASON
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    textAlign: TextAlign.center,) : new Container(),
+                  areport["waterContamination"] == true ? new Text("- Water Contamination",
+                    // FIX THIS LATER TO INCLUDE REASON
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    textAlign: TextAlign.center,) : new Container(),
+                  areport["internal"] == true ? new Text("- Internal",
+                    // FIX THIS LATER TO INCLUDE REASON
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    textAlign: TextAlign.center,) : new Container(),
+                  areport["addInfo"] != "" ? new Text("Additional Info: " + areport["addInfo"],
+                    // FIX THIS LATER TO INCLUDE REASON
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    textAlign: TextAlign.center,) : new Container(),
                 ])),
       );
     } else {

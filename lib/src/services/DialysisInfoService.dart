@@ -12,7 +12,7 @@ HTTP Get requests for dialysis center information and for GoogleMaps.
  */
 class DialysisInfoService {
 
-  static final key = 'AIzaSyBZZvJlR5JkiBo_5mSKYvBFoxFg2noE1VA';
+  static final key = 'AIzaSyBgKQvmYT0H1PfL3oLHNl2Ge58TFyxZESk';
 
   // get selected dialysis center information for info screen
   Future<DialysisInfo> getDialysisCenterInfo(String id) async {

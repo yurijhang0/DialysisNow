@@ -10,6 +10,20 @@ users the capability to report closures of certain dialysis centers
 during times of crisis. This will allow other users to avoid wasting
 valuable time searching a multitude of centers to find treatment.
 
+## Release Notes for Version 0.5.0
+
+### Version 0.5.0
+#### New Features:
+* Report Dialysis Center status (synchronized over multiple devices)
+
+#### Bug Fixes
+* N/A
+
+#### Known Issues
+* N/A
+
+##
+
 ## Release Notes for Version 0.4.0
 
 ### Version 0.4.0
@@ -50,6 +64,7 @@ valuable time searching a multitude of centers to find treatment.
 
 * The map marker can be clicked for the info screen for the center's information.
 
+
 #### Bug Fixes
 * Crowding on map screen
 
@@ -60,6 +75,7 @@ valuable time searching a multitude of centers to find treatment.
 
 ### Version 0.1.0
 #### New Features:
+
 * Linked the Google Places API to the application to provide
   navigational services and features.
 
