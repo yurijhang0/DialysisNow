@@ -1,14 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:fryo/src/screens/MainInfoScreen.dart';
-import 'package:fryo/src/screens/MapScreen.dart';
-import 'package:fryo/src/screens/InfoScreen.dart';
-import 'package:fryo/src/services/ApplicationBloc.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:fryo/src/services/DialysisInfo.dart';
 import 'package:fryo/src/services/DialysisInfoService.dart';
 import 'package:fryo/src/shared/colors.dart';
@@ -17,6 +8,9 @@ import 'package:fryo/src/shared/styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fryo/src/shared/globals.dart' as globals;
 import 'package:fryo/src/models/MyUser.dart';
+=======
+import 'package:fryo/src/models/user.dart';
+>>>>>>> 144e1272832ebd9854988c30bc2abb80ae4583ca
 import 'package:fryo/src/screens/MapScreen.dart';
 import 'package:fryo/src/screens/InfoScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -34,8 +28,10 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return ChangeNotifierProvider(
       create: (context) => ApplicationBloc(),
       child: MaterialApp(
@@ -107,6 +103,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         onTap: _onItemTapped,
       ),
     /*return StreamProvider<User?>.value(
+=======
+    return StreamProvider<User?>.value(
+>>>>>>> 144e1272832ebd9854988c30bc2abb80ae4583ca
       initialData: null,
       value: AuthService().user,
       child: MaterialApp(
