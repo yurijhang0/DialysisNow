@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../services/auth.dart';
+import '../../services/AuthService.dart';
 
 class Register extends StatefulWidget {
 
   final Function toggleView;
-  Register({ required this.toggleView});
+  Register({ this.toggleView});
 
   @override
   State<Register> createState() => _RegisterState();

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fryo/src/services/auth.dart';
+import 'package:fryo/src/services/AuthService.dart';
 
 class SignIn extends StatefulWidget {
 
   final Function toggleView;
-  SignIn({ required this.toggleView});
+  SignIn({ this.toggleView});
 
   @override
   SignInState createState() => SignInState();

@@ -16,12 +16,12 @@ import 'package:fryo/src/shared/fryo_icons.dart';
 import 'package:fryo/src/shared/styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fryo/src/shared/globals.dart' as globals;
-import 'package:fryo/src/models/user.dart';
+import 'package:fryo/src/models/MyUser.dart';
 import 'package:fryo/src/screens/MapScreen.dart';
 import 'package:fryo/src/screens/InfoScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fryo/src/screens/wrapper.dart';
-import 'package:fryo/src/services/auth.dart';
+import 'package:fryo/src/services/AuthService.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
@@ -87,29 +87,26 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               icon: Icon(Fryo.search),
-              title: Text(
-                'Search',
-                style: tabLinkStyle,
-              )),
+              label: 'Search',
+              //style: tabLinkStyle,
+              ),
           BottomNavigationBarItem(
               icon: Icon(Fryo.star),
-              title: Text(
-                'Main Center',
-                style: tabLinkStyle,
-              )),
+              label: 'Main Center',
+              //style: tabLinkStyle,
+              ),
           BottomNavigationBarItem(
               icon: Icon(Fryo.alarm),
-              title: Text(
-                'Resources',
-                style: tabLinkStyle,
-              )),
+              label:'Resources',
+              //style: tabLinkStyle,
+              ),
         ],
         currentIndex: _selectedIndex,
         type: BottomNavigationBarType.fixed,
         fixedColor: Colors.green[600],
         onTap: _onItemTapped,
       ),
-    return StreamProvider<User?>.value(
+    /*return StreamProvider<User?>.value(
       initialData: null,
       value: AuthService().user,
       child: MaterialApp(
@@ -125,7 +122,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       //   '/signin': (BuildContext context) =>  SignInPage(),
       //   '/dashboard': (BuildContext context) => Dashboard(),
       //   '/productPage': (BuildContext context) => ProductPage(),
-      // },
+      // },*/
     );
   }
 }

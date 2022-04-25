@@ -1,10 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fryo/src/models/MyUser.dart';
 import 'package:fryo/src/screens/InfoScreen.dart';
+import '../services/DatabaseService.dart';
 import '../shared/colors.dart';
-import 'package:flutter/services/database.dart';
+import 'package:fryo/src/services/DatabaseService.dart';
+import 'package:provider/provider.dart';
+
 
 class ReportScreen extends StatefulWidget {
   final String pageTitle;
+
 
   ReportScreen({Key key, this.pageTitle}) : super(key: key);
 
@@ -24,6 +31,9 @@ class _ReportScreenState extends State<ReportScreen> {
   var otherBool = false;
   var additionalInfo = Text("");
 
+  get email => null;
+  get password => null;
+
   @override
   void dispose() {
     // clean controller when widget disposed
@@ -33,15 +43,18 @@ class _ReportScreenState extends State<ReportScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: bgColor,
-        appBar: _topBar(),
-        body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              _report(),
-            ]));
+    return StreamProvider<QuerySnapshot>.value(
+      value: DatabaseService().reports,
+      child: Scaffold(
+          backgroundColor: bgColor,
+          appBar: _topBar(),
+          body: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                _report(),
+              ])),
+    );
   }
 
 //AppBar
@@ -56,6 +69,17 @@ class _ReportScreenState extends State<ReportScreen> {
   }
 
   Widget _report() {
+
+    final FirebaseAuth auth = FirebaseAuth.instance;
+
+    MyUser userFromFirebaseUser(User user) {
+      if (user != null) {
+        return MyUser(uid: user.uid);
+      } else {
+        return null;
+      }
+    }
+
     return Container(
         padding: const EdgeInsets.all(10.0),
         child: Column(
@@ -83,8 +107,12 @@ class _ReportScreenState extends State<ReportScreen> {
                       shape: CircleBorder(),
                       backgroundColor: Colors.green[100],
                       child: Icon(Icons.power_off_outlined, color: Colors.black87),
-                      onPressed: (){
-                        powerOutageBool = true;
+                      onPressed: () async {
+                        //powerOutageBool = true;
+                        //UserCredential result = await auth.createUserWithEmailAndPassword(email: email, password: password);
+                        //User user = result.user;
+                        return await DatabaseService().updateUserData(true, false, false, false, false, '');
+                        //return userFromFirebaseUser(user);
                       },
                     ),
                   )

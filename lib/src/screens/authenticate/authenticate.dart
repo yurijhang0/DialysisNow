@@ -14,7 +14,6 @@ class AuthenticateState extends State<Authenticate> {
     setState(() => showSignIn = !showSignIn);
   }
 
-
   @override
   Widget build(BuildContext context) {
     if (showSignIn) {
