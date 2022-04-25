@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fryo/src/screens/InfoScreen.dart';
 import '../shared/colors.dart';
+import 'dart:developer';
 
 class ReportScreen extends StatefulWidget {
   final String pageTitle;
@@ -55,6 +56,7 @@ class _ReportScreenState extends State<ReportScreen> {
   }
 
   Widget _report() {
+    Color _colorContainer = Colors.green[100];
     return Container(
         padding: const EdgeInsets.all(10.0),
         child: Column(
@@ -80,10 +82,9 @@ class _ReportScreenState extends State<ReportScreen> {
                   child: FittedBox(
                     child: FloatingActionButton(
                       shape: CircleBorder(),
-                      backgroundColor: Colors.green[100],
+                      backgroundColor: powerOutageBool ? Colors.green[300] : Colors.green[100],
                       child: Icon(Icons.power_off_outlined, color: Colors.black87),
-                      onPressed: (){
-                        powerOutageBool = true;
+                      onPressed: () { setState(() => powerOutageBool = !powerOutageBool);
                       },
                     ),
                   )
@@ -94,10 +95,10 @@ class _ReportScreenState extends State<ReportScreen> {
                     child: FittedBox(
                       child: FloatingActionButton(
                         shape: CircleBorder(),
-                        backgroundColor: Colors.green[100],
+                        backgroundColor: hurricaneBool ? Colors.green[300] : Colors.green[100],
                         child: Icon(Icons.storm, color: Colors.black87),
                         onPressed: (){
-                          hurricaneBool = true;
+                          setState(() => hurricaneBool = !hurricaneBool);
                         },
                       ),
                     )
@@ -108,10 +109,10 @@ class _ReportScreenState extends State<ReportScreen> {
                     child: FittedBox(
                       child: FloatingActionButton(
                         shape: CircleBorder(),
-                        backgroundColor: Colors.green[100],
+                        backgroundColor: waterContaminationBool ? Colors.green[300] : Colors.green[100],
                         child: Icon(Icons.water_damage_outlined, color: Colors.black87),
                         onPressed: (){
-                          waterContaminationBool = true;
+                          setState(() => waterContaminationBool = !waterContaminationBool);
                         },
                       ),
                     )
@@ -277,7 +278,8 @@ class _ReportScreenState extends State<ReportScreen> {
                     if (powerOutageBool || hurricaneBool || waterContaminationBool ||internalBool || otherBool || additionalInfo.data != "") {
                       closureBool = true;
                     }
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => InfoScreen(closureBool: closureBool)));
+                    Navigator.pop(context);
+                    //Navigator.push(context, MaterialPageRoute(builder: (context) => InfoScreen(closureBool: closureBool)));
                   },
                   child:
                   const Text(

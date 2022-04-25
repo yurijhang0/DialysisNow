@@ -128,7 +128,7 @@ class _InfoScreenState extends State<InfoScreen> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => ReportScreen()));
               }),
-              headerCategoryItem('Mark as Main', Fryo.heart, onPressed: () => {
+              headerCategoryItem('Main', Fryo.heart, onPressed: () => {
                   globals.mainID = widget.placeID,
                   globals.widgetOptions[1] = MainInfoScreen(placeID: globals.mainID),
               }),

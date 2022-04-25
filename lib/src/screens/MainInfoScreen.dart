@@ -123,7 +123,7 @@ class _MainInfoScreenState extends State<MainInfoScreen> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => ReportScreen()));
               }),
-              headerCategoryItem('Remove from Main', Fryo.heart, onPressed: () =>
+              headerCategoryItem('Remove', Fryo.heart, onPressed: () =>
               {
                 globals.mainID = "",
                 globals.widgetOptions[1] =
