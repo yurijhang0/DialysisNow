@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fryo/src/models/report.dart';
 
 class DatabaseService {
 
@@ -20,9 +21,24 @@ class DatabaseService {
     });
   }
 
+  // reports list from snapshot
+  List<Report> reportListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return Report(
+        powerOutage: doc.get('powerOutage') ?? false,
+        hurricane: doc.get('hurricane') ?? false,
+        waterContamination: doc.get('waterContamination') ?? false,
+        internal: doc.get('internal') ?? false,
+        other: doc.get('other') ?? false,
+        addInfo: doc.get('addInfo') ?? " ",
+      );
+    }).toList();
+  }
+
   // get reports stream
-  Stream<QuerySnapshot> get reports {
-    return reportCollection.snapshots();
+  Stream<List<Report>> get reports {
+    return reportCollection.snapshots()
+    .map(reportListFromSnapshot);
   }
 
 }

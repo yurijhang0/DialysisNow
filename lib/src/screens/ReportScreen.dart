@@ -1,13 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fryo/src/models/MyUser.dart';
 import 'package:fryo/src/screens/InfoScreen.dart';
+import '../models/report.dart';
 import '../services/DatabaseService.dart';
 import '../shared/colors.dart';
 import 'package:fryo/src/services/DatabaseService.dart';
 import 'package:provider/provider.dart';
-
+import 'package:fryo/src/screens/ReportList.dart';
 
 class ReportScreen extends StatefulWidget {
   final String pageTitle;
@@ -44,7 +44,7 @@ class _ReportScreenState extends State<ReportScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<QuerySnapshot>.value(
+    return StreamProvider<List<Report>>.value(
       value: DatabaseService().reports,
       child: Scaffold(
           backgroundColor: bgColor,
