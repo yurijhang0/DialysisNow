@@ -16,8 +16,22 @@ import 'package:fryo/src/shared/fryo_icons.dart';
 import 'package:fryo/src/shared/styles.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fryo/src/shared/globals.dart' as globals;
+import 'package:fryo/src/models/user.dart';
+import 'package:fryo/src/screens/MapScreen.dart';
+import 'package:fryo/src/screens/InfoScreen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:fryo/src/screens/wrapper.dart';
+import 'package:fryo/src/services/auth.dart';
+import 'package:provider/provider.dart';
+import 'firebase_options.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -95,6 +109,23 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         fixedColor: Colors.green[600],
         onTap: _onItemTapped,
       ),
+    return StreamProvider<User?>.value(
+      initialData: null,
+      value: AuthService().user,
+      child: MaterialApp(
+        home: Wrapper(),
+      )
+      title: 'Fryo',
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+      ),
+     //, // just for testing
+      // routes: <String, WidgetBuilder> {
+      //   '/signup': (BuildContext context) =>  SignUpPage(),
+      //   '/signin': (BuildContext context) =>  SignInPage(),
+      //   '/dashboard': (BuildContext context) => Dashboard(),
+      //   '/productPage': (BuildContext context) => ProductPage(),
+      // },
     );
   }
 }

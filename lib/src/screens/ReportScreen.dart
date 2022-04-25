@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fryo/src/screens/InfoScreen.dart';
 import '../shared/colors.dart';
+<<<<<<< HEAD
 import 'dart:developer';
+=======
+import 'package:flutter/services/database.dart';
+>>>>>>> b941259a520f114213201a06688f8b10a3cca7e8
 
 class ReportScreen extends StatefulWidget {
   final String pageTitle;
