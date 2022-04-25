@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fryo/src/services/DialysisInfo.dart';
@@ -7,10 +8,12 @@ import 'package:fryo/src/screens/MainInfoScreen.dart';
 import 'package:fryo/src/shared/colors.dart';
 import 'package:fryo/src/shared/fryo_icons.dart';
 import 'package:fryo/src/shared/styles.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fryo/src/shared/globals.dart' as globals;
 import 'package:fryo/main.dart' as main;
 
+import '../services/DatabaseService.dart';
 import 'ReportScreen.dart';
 
 class InfoScreen extends StatefulWidget {
@@ -39,35 +42,38 @@ class _InfoScreenState extends State<InfoScreen> {
   @override
   Widget build(BuildContext context) {
     dialysisInfoService = new DialysisInfoService();
-    return FutureBuilder<DialysisInfo>(
-      future: dialysisInfoService.getDialysisCenterInfo(widget.placeID),
-      builder: (BuildContext context,
-          AsyncSnapshot<DialysisInfo> snapshot) { // AsyncSnapshot<DialysisInfo>
-        if (snapshot.connectionState ==
-            ConnectionState.waiting) { // loading state -- create load screen
-          return Center(child: Text('Please wait its loading...'));
-        } else {
-          if (snapshot
-              .hasError) { // failure for API request -- create error screen
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else { // got API request -- create main info screen
-            snapshot2 = snapshot;
-            // log(snapshot2.data.imageURL);
-            return Scaffold(
-                backgroundColor: bgColor,
-                appBar: AppBar(
-                  centerTitle: true,
-                  elevation: 0,
-                  backgroundColor: primaryColor,
-                  title:
-                  Text('DialysisNow', textAlign: TextAlign.center),
-                ),
-                body: infoTab(context),);
-            return Center(child: new Text('${snapshot
-                .data}')); // snapshot.data  :- get your object which is pass from your getDialysisCenterInfo() function
+    return StreamProvider<QuerySnapshot>.value(
+      value: DatabaseService().reports,
+      child: FutureBuilder<DialysisInfo>(
+        future: dialysisInfoService.getDialysisCenterInfo(widget.placeID),
+        builder: (BuildContext context,
+            AsyncSnapshot<DialysisInfo> snapshot) { // AsyncSnapshot<DialysisInfo>
+          if (snapshot.connectionState ==
+              ConnectionState.waiting) { // loading state -- create load screen
+            return Center(child: Text('Please wait its loading...'));
+          } else {
+            if (snapshot
+                .hasError) { // failure for API request -- create error screen
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else { // got API request -- create main info screen
+              snapshot2 = snapshot;
+              // log(snapshot2.data.imageURL);
+              return Scaffold(
+                  backgroundColor: bgColor,
+                  appBar: AppBar(
+                    centerTitle: true,
+                    elevation: 0,
+                    backgroundColor: primaryColor,
+                    title:
+                    Text('DialysisNow', textAlign: TextAlign.center),
+                  ),
+                  body: infoTab(context),);
+              return Center(child: new Text('${snapshot
+                  .data}')); // snapshot.data  :- get your object which is pass from your getDialysisCenterInfo() function
+            }
           }
-        }
-      },
+        },
+      ),
     );
   }
 
@@ -78,6 +84,7 @@ class _InfoScreenState extends State<InfoScreen> {
   }
 
   Widget infoTab(BuildContext context) {
+    //var alist = DatabaseService().reports.toList();
     return ListView(children: <Widget>[
       Image.network(
         'https://maps.googleapis.com/' +
