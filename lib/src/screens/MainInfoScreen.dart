@@ -74,8 +74,9 @@ class _MainInfoScreenState extends State<MainInfoScreen> {
 
   Widget mainInfoTab(BuildContext context) {
     List<Map<String, dynamic>> rList = globals.reportList;
+    isFill = false;
     rList.forEach((element) => {
-      if (element["placeID"] == id) {
+      if (element["placeID"] == globals.mainID) {
         isFill = true,
         areport = element
       }
@@ -132,7 +133,7 @@ class _MainInfoScreenState extends State<MainInfoScreen> {
             children: <Widget>[
               headerCategoryItem('Report', Fryo.pencil, onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ReportScreen(placeID: id))).then(onGoBack);
+                    MaterialPageRoute(builder: (context) => ReportScreen(placeID: globals.mainID))).then(onGoBack);
               }),
               headerCategoryItem('Remove from Main', Fryo.heart, onPressed: () =>
               {
