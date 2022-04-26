@@ -95,12 +95,20 @@ class _InfoScreenState extends State<InfoScreen> {
 
   Widget infoTab(BuildContext context) {
     List<Map<String, dynamic>> rList = globals.reportList;
+    isFill = false;
+    log(rList.toString());
     rList.forEach((element) => {
+      log(element["placeID"]),
+      log(widget.placeID),
       if (element["placeID"] == widget.placeID) {
+        log("hey"),
         isFill = true,
         areport = element
       }
     });
+    log(isFill.toString());
+    log("BYE");
+
     return ListView(children: <Widget>[
       Image.network(
         'https://maps.googleapis.com/' +
