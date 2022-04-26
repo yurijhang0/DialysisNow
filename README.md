@@ -14,10 +14,10 @@ valuable time searching a multitude of centers to find treatment.
 
 ### Version 0.5.0
 #### New Features:
-* Report Dialysis Center status (synchronized over multiple devices)
+* Ability to report dialysis center status (synchronized over multiple devices) and have that information reflected in-application
 
 #### Bug Fixes
-* N/A
+* As previously stated in our last release notes, we were facing significant issues with MongoDB as our database. We pivoted to Firebase, which we ended up utilizing for our report functionality
 
 #### Known Issues
 * N/A
