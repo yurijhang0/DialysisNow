@@ -90,3 +90,35 @@ valuable time searching a multitude of centers to find treatment.
 
 #### Known Issues
 * N/A
+
+##
+
+# Installation Guide
+
+Listed below are some steps for setting up a Flutter project. It is recommended to follow the installation guide for each respective software, as it is typically specific to your operating system.
+
+### Prerequisite:
+1. Download VS Code (https://code.visualstudio.com/download)
+2. Install Flutter (https://docs.flutter.dev/get-started/install)
+3. Set-up Flutter (https://docs.flutter.dev/get-started/install/macos) 
+    - Tip: Run flutter doctor in your terminal to check for any issues / check status
+
+
+### Project Set-Up (Download Build and Installation)
+1. Download the DialysisNow GitHub project: https://github.com/yurijhang0/JIE1355_DialysisNow
+2. Open project in VS Code
+3. Get and upgrade Dependencies (Click on buttons at the top right corner)
+4. If there's a version mismatch, follow the following steps:
+    - sudo gem install cocoapods
+    - pod update
+
+
+### Running and Exporting Application
+1. Run the project by selecting a simulator within VS Code and running main.dart
+2. Export to iOS device (https://docs.flutter.dev/get-started/install/macos)
+
+### Troubleshooting
+1. Run flutter doctor to check for any possible issues
+2. Make sure all dependencies are up-to-date and unconflicting to avoid issues
+3. Link: https://medium.com/wayvs-tech/flutter-troubleshooting-guide-c5eb5ccb595f
+
